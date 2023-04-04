@@ -1,39 +1,3 @@
-.menu {
-  @apply bg-dark-purple h-screen p-5 pt-8 relative duration-300 ;
-}
-
-.icon {
-  @apply bg-amber-300 text-4xl rounded cursor-pointer block float-left mr-2 duration-500 ;  
-}
-
-.menuh1 {
-  @apply text-white origin-left font-medium text-2xl duration-300;
-}
-
-.wrapper {
-  @apply inline-flex ;
-}
-
-.menuarrow {
-  @apply bg-white 
-          text-dark-purple text-3xl rounded-full 
-          absolute -right-3 top-9 
-          border border-dark-purple 
-          cursor-pointer 
-          duration-500 ;
-}
-
-.searchitem {
-  @apply flex items-center rounded-md bg-light-white mt-6 py-2;
-}
-
-.searchicon {
-  @apply text-white text-lg block float-left cursor-pointer;
-}
-
-.searchinput {
-  @apply text-base bg-transparent w-9/12 text-white focus:outline-none;
-}
 
 .menuitems {
   @apply pt-2 

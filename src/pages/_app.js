@@ -29,5 +29,7 @@ export default function App({ Component, pageProps }) {
 
   ]  
 
-  return <Layout menuItems={menuItems}><Component {...pageProps} /></Layout>
+  const title = "Econ 2023" ;
+
+  return <Layout menuItems={menuItems} title={title}><Component {...pageProps} /></Layout>
 }
