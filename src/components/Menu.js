@@ -1,0 +1,40 @@
+import { BsArrowLeftShort , BsSearch , BsChevronDown } from 'react-icons/bs' 
+import { RiDashboardFill } from 'react-icons/ri' ;
+
+import { useState } from 'react' ;
+import styles from '../styles/Menu.module.css';
+
+
+export default function Menu(props) {
+    const [submenuOpen,setSubmenuOpen] = useState(false)
+    return (
+        <ul className={styles.menuitems}>
+        {props.menuItems.map((menu,index) => (
+            <>
+            <li key={index} className={styles.menuitem+` ${menu.spacing?"mt-9":"mt-2"}`}>
+                <span className={styles.menuitemicon}>
+                { menu.icon ? menu.icon : <RiDashboardFill/> }
+                </span>
+
+                <span className={styles.menuitemtext+` ${!props.open && "hidden"}`}>{menu.title}</span>
+                {menu.submenu && props.open && (
+                    <BsChevronDown className={`${submenuOpen && "rotate-180"}`} onClick={()=>setSubmenuOpen(!submenuOpen)}/>
+                )
+                }
+            </li>
+            {menu.submenu && submenuOpen && props.open && (
+                <ul>
+                    {menu.submenuItems.map((submenuItem,index2) => (
+                    <li key={`${index}.${index2}`} className={styles.submenuitem+` ${menu.spacing?"mt-9":"mt-2"}`}>
+                        {submenuItem.title}
+                    </li>
+                    )
+                    )}
+                </ul>
+            )
+            }
+            </>
+        ))}
+        </ul>
+    )
+}

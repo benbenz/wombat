@@ -1,0 +1,24 @@
+Web site template using NextJS
+
+Features:
+- master layout (index.jsx)
+- next-mdx-remote: change tag dans json notebook >> ReactJS "Link" (to enable Router too)
+- MD/MDX render
+- notebook render
+- katex react for LaTex render
+- download button for notebooks
+
+Librairies:
+- LaTex: katek-react
+- mdx: MDXProvider (next/mdx)
+- mdx: hashicorp/next-mdx-remote
+- mdx: mdx-js/loader
+- jpyter: @jupyter-widgets/html-manager
+- jpyter: @datalayer/jupyter-widgets
+
+Issues:
+- get static prop (the way the external notebookx/mds will be declared?)
+  >> external file static: problem with Hot Reload?
+
+NextJS:
+- generate website 
