@@ -8,17 +8,17 @@ import Layout from '../components/Layout.js'
 
 export default function App({ Component, pageProps }) {
   const menuItems = [
-    { title: "Intro" , link: "/content/intro"} ,
-    { title: "Pages" , icon: <AiOutlineFileText/>} ,
-    { title: "Medias" , icon: <BsFillImageFill/> , spacing: true } ,
+    { title: "Intro" , link: "intro.html"} ,
+    { title: "Docs" , link: "/content/documents" , icon: <AiOutlineFileText/>} ,
+    { title: "Medias" , link: "/content/medias" , icon: <BsFillImageFill/> , spacing: true } ,
     {
       title: "Examples" ,
       icon : <BsReverseLayoutTextSidebarReverse/>,
       submenu: true ,
       submenuItems : [
-        { title: "MarkDown" , linkMaterial: "example.mdx" } ,
-        { title: "Jupyter" , linkMaterial: "ols.ipynb" } ,
-        { title: "Static" , link: "/"}
+        { title: "MarkDown" , link: "example.mdx" } ,
+        { title: "Jupyter" , link: "ols.ipynb" } ,
+        { title: "Other" , link: "/"}
       ]
     } ,
     { title: "Analytics" , icon: <AiOutlineBarChart/> },

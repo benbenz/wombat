@@ -3,7 +3,18 @@ import { RiDashboardFill } from 'react-icons/ri' ;
 
 import { useState } from 'react' ;
 import styles from '../styles/Menu.module.css';
+import Link from 'next/link';
 
+function MenuLink({menu}) {
+    if(menu.link) {
+        if(menu.link.endsWith(".html"))
+            return <Link href={"/page/"+menu.link}>{menu.title}</Link>
+        else
+            return <Link href={menu.link}>{menu.title}</Link>
+
+    } else
+        return menu.title
+}
 
 export default function Menu(props) {
     const [submenuOpen,setSubmenuOpen] = useState(false)
@@ -16,7 +27,7 @@ export default function Menu(props) {
                 { menu.icon ? menu.icon : <RiDashboardFill/> }
                 </span>
 
-                <span className={styles.menuitemtext+` ${!props.open && "hidden"}`}>{menu.title}</span>
+                <span className={styles.menuitemtext+` ${!props.open && "hidden"}`}><MenuLink menu={menu}/></span>
                 {menu.submenu && props.open && (
                     <BsChevronDown className={`${submenuOpen && "rotate-180"}`} onClick={()=>setSubmenuOpen(!submenuOpen)}/>
                 )
