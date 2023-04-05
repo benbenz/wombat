@@ -6,7 +6,7 @@ import styles from '../styles/Menu.module.css';
 import Link from 'next/link';
 import React from 'react'
 
-function MenuLink({children,menu}) {
+function MenuLink({children,menu,submenuOpen,setSubmenuOpen}) {
     if(menu.link) {
         if(menu.link.endsWith(".html"))
             return <Link href={"/proxy/html/"+menu.link}>{children}</Link>
@@ -15,8 +15,13 @@ function MenuLink({children,menu}) {
         else
             return <Link href={menu.link}>{children}</Link>
 
-    } else
-        return <>{children}</>
+    } else {
+        if(menu.submenu) {
+            return <span onClick={()=>setSubmenuOpen(!submenuOpen)}>{children}</span>
+        } else {
+            return <>{children}</>
+        }
+    }
 }
 
 export default function Menu(props) {
@@ -25,7 +30,7 @@ export default function Menu(props) {
         <ul className={styles.menuitems}>
         {props.menuItems.map((menu,index) => (
             <React.Fragment key={index}>
-            <MenuLink menu={menu}>
+            <MenuLink menu={menu} submenuOpen={submenuOpen} setSubmenuOpen={setSubmenuOpen}>
             <li className={styles.menuitem+` ${menu.spacing?"mt-9":"mt-2"}`}>
                 <span className={styles.menuitemicon}>
                 { menu.icon ? menu.icon : <RiDashboardFill/> }

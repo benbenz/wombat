@@ -2,6 +2,9 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import styles from '../../../styles/mdxContent.module.css';
+import NormalizedSection from '../../../styles/normalize.module.css'
+import MeyerReset from '../../../styles/meyerreset.module.css'
+import Head from 'next/head';
 
 const MyComponent = ({ pageName }) => {
   const [Component, setComponent] = useState(null);
@@ -19,9 +22,15 @@ const MyComponent = ({ pageName }) => {
   }
 
   return (
-    <div className={styles.mdxContent}>
+    <>
+     <Head>
+      {/* <NormalizedSection/>
+      <MeyerReset/> */}
+    </Head>
+    <div className={styles.mdxContent+' normalizedSection reset'}>
       <Component />
     </div>
+    </>
   );
 };
 

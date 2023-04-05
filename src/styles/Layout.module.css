@@ -1,5 +1,5 @@
 .leftbar {
-  @apply bg-dark-purple h-screen p-5 pt-8 relative duration-300 ;
+  @apply bg-dark-purple h-fit p-5 pt-8 relative duration-300 ;
 }
 
 .logo {
@@ -36,6 +36,7 @@
 }
 
 .main {
+  flex-basis: 75%;
 }
 
 .code {

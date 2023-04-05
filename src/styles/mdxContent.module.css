@@ -1,5 +1,15 @@
+.mdxContent > * {
+    all: revert;
+}
+/*
+.mdxContent * ::before, .mdxContent * ::after {
+  box-sizing: revert;
+}*/
+
 .mdxContent {
-    all: initial;
-  }
-  
-  
+  all: revert ;
+}
+
+.mdxContent>h1:first-child , .mdxContent>h2:first-child {
+  margin-top: 0 ;
+}
