@@ -1,6 +1,7 @@
 // pages/page/[pageName].js
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+import styles from '../../../styles/mdxContent.module.css';
 
 const MyComponent = ({ pageName }) => {
   const [Component, setComponent] = useState(null);
@@ -18,7 +19,7 @@ const MyComponent = ({ pageName }) => {
   }
 
   return (
-    <div>
+    <div className={styles.mdxContent}>
       <Component />
     </div>
   );
