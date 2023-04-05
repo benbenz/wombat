@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "@jupyter-widgets/html-manager": "^1.0.7",
+    "@mdx-js/react": "^2.3.0",
+    "@next/mdx": "^13.2.4",
     "chokidar": "^3.5.3",
     "next": "13.2.4",
     "next-mdx-remote": "^4.4.1",
@@ -26,6 +28,7 @@
     "ws": "^8.13.0"
   },
   "devDependencies": {
+    "@mdx-js/loader": "^2.3.0",
     "autoprefixer": "^10.4.14",
     "html-loader": "^4.2.0",
     "postcss": "^8.4.21",

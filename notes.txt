@@ -1,7 +1,7 @@
 Web site template using NextJS
 
 Features:
-- master layout (index.jsx)
+x master layout (index.jsx)
 - next-mdx-remote: change tag dans json notebook >> ReactJS "Link" (to enable Router too)
 - MD/MDX render
 - notebook render

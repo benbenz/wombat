@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
       icon : <BsReverseLayoutTextSidebarReverse/>,
       submenu: true ,
       submenuItems : [
-        { title: "MarkDown" , link: "example.mdx" } ,
+        { title: "MarkDown" , link: "/mdx/example" } ,
         { title: "Jupyter" , link: "ols.ipynb" } ,
         { title: "Other" , link: "/"}
       ]

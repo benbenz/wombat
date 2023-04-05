@@ -8,7 +8,9 @@ import Link from 'next/link';
 function MenuLink({children,menu}) {
     if(menu.link) {
         if(menu.link.endsWith(".html"))
-            return <Link href={"/page/html/"+menu.link}>{children}</Link>
+            return <Link href={"/page/"+menu.link}>{children}</Link>
+        else if(menu.link.endsWith(".md") || menu.link.endsWith(".mdx"))
+            return <Link href={"/mdx/"+menu.link}>{children}</Link>
         else
             return <Link href={menu.link}>{children}</Link>
 
@@ -38,9 +40,11 @@ export default function Menu(props) {
             {menu.submenu && submenuOpen && props.open && (
                 <ul>
                     {menu.submenuItems.map((submenuItem,index2) => (
+                    <MenuLink menu={submenuItem}>
                     <li key={`${index}.${index2}`} className={styles.submenuitem+` ${menu.spacing?"mt-9":"mt-2"}`}>
                         {submenuItem.title}
                     </li>
+                    </MenuLink>
                     )
                     )}
                 </ul>
