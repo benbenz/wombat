@@ -99,4 +99,6 @@ const nextConfig = {
 // if using @mdx-js/loader (commented above), a change in the file will cause a full refresh ...
 // so we prefer the withMDX syntax
 //module.exports = withMDX(nextConfig)
-export default withCustomLoader(withMDX(nextConfig));
+// with custom wrapper, the reload is full ... not elegent enough
+//export default withCustomLoader(withMDX(nextConfig));
+export default withMDX(nextConfig);

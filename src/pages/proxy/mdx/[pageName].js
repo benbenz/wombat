@@ -36,7 +36,6 @@ const MyComponent = ({ pageName }) => {
       <div className={styles.resetContent+' normalizedSection meyerreset'}>
         <Component/>
       </div>
-      )
       </>
     );
   } else {

@@ -29,8 +29,7 @@ export default function WrappedComponent(props) {
     { className: styles.resetContent + ' normalizedSection meyerreset' },
     React.createElement(OriginalComponent, props)
   );
-}
-  `;
+}`;
 
   // Return the modified source
   return importReact + modifiedSource + wrappedExport;
