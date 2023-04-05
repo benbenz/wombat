@@ -26,7 +26,9 @@ const Layout = ({ children , title, menuItems }) => {
         </div>{/* wrapper */}
     
         <main className={styles.main+" "}>
-            {children}
+            <div className="p-7">
+               {children}
+            </div>
         </main>
     
     </div>

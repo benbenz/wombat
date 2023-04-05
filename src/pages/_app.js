@@ -16,12 +16,15 @@ export default function App({ Component, pageProps }) {
       icon : <BsReverseLayoutTextSidebarReverse/>,
       submenu: true ,
       submenuItems : [
-        { title: "MarkDown" , link: "/mdx/example" } ,
+        // this one will go through the mdxwrapper loader (it's supposed to wrap in a CSS reset - doesnt work right now because it comes FIRST !!!)
+        { title: "MDX direct thru" , link: "mdx/example" } , 
+        // this one will go through the mdx proxy (same file)
+        { title: "MDW with proxy" , link: "example.mdx" } , 
         { title: "Jupyter" , link: "ols.ipynb" } ,
         { title: "Other" , link: "/"}
       ]
     } ,
-    { title: "Analytics" , icon: <AiOutlineBarChart/> },
+    { title: "Analytics" , link: "/html/analytics" , icon: <AiOutlineBarChart/> },
     { title: "Inbox" , icon: <AiOutlineMail/> },
     { title: "Profile" , icon: <BsPerson/>, spacing: true },
     { title: "Settings" , icon: <AiOutlineSetting/> },

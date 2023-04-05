@@ -5,14 +5,15 @@ const path = require('path');
 
 const HtmlFragment = ({ pageName }) => {
     const [htmlContent, setHtmlContent] = useState(false);
-
     useEffect(() => {
+      if(!pageName)
+        return
       const loadHtml = async () => {
-        const module = await import(`../html/${pageName}`)
-          setHtmlContent(module.default);
+        const module = await import(`../../html/${pageName}`)
+        setHtmlContent(module.default);
       };
-      if(pageName)
-        loadHtml();
+      loadHtml();
+
     }, [pageName]);
   
     if (!htmlContent) {
