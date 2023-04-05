@@ -1,6 +1,6 @@
 // pages/page/[pageName].js
 import { useRouter } from 'next/router';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef } from 'react';
 import styles from '../../../styles/resetContent.module.css';
 import NormalizedSection from '../../../styles/normalize.module.css'
 import MeyerReset from '../../../styles/meyerreset.module.css'
@@ -8,8 +8,13 @@ import Head from 'next/head';
 
 const MyComponent = ({ pageName }) => {
   const [Component, setComponent] = useState(null);
+  const [addWrapper, setAddWrapper] = useState(true);
+  // const ref = useRef(null);
   useEffect(() => {
     if (!pageName) return;
+    // if(ref.current.classList.contains('resetContent')) { 
+    //   setAddWrapper(false)
+    // }
     const loadComponent = async () => {
       const module = await import(`../../mdx/${pageName}`);
       setComponent(() => module.default);
@@ -21,17 +26,24 @@ const MyComponent = ({ pageName }) => {
     return <div>Loading...</div>;
   }
 
-  return (
-    <>
-     <Head>
-      {/* <NormalizedSection/>
-      <MeyerReset/> */}
-    </Head>
-    <div className={styles.resetContent+' normalizedSection meyerreset'}>
-      <Component />
-    </div>
-    </>
-  );
+  if(addWrapper) {
+    return (
+      <>
+      <Head>
+        {/* <NormalizedSection/>
+        <MeyerReset/> */}
+      </Head>
+      <div className={styles.resetContent+' normalizedSection meyerreset'}>
+        <Component/>
+      </div>
+      )
+      </>
+    );
+  } else {
+    return (
+      <Component/>
+    )
+  } 
 };
 
 const Page = () => {

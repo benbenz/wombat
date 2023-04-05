@@ -17,9 +17,11 @@ export default function App({ Component, pageProps }) {
       submenu: true ,
       submenuItems : [
         // this one will go through the mdxwrapper loader (it's supposed to wrap in a CSS reset - doesnt work right now because it comes FIRST !!!)
-        { title: "MDX direct thru" , link: "/mdx/example" } , 
+        { title: "MD direct thru" , link: "/mdx/example" } , 
         // this one will go through the mdx proxy (same file)
-        { title: "MDX with proxy" , link: "example.mdx" } , 
+        { title: "MD with proxy" , link: "example.md" } , 
+        { title: "MDX direct thru" , link: "/mdx/example2" } , 
+        { title: "MDX with proxy" , link: "example2.mdx" } , 
         { title: "Jupyter" , link: "notebooks.ipynb" } ,
         { title: "Jupyter" , link: "ols.ipynb" } ,
         { title: "Other" , link: "/"}

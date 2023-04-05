@@ -15,6 +15,22 @@ const withMDX = _withMDX({ //require('@next/mdx')({
   },
 })
 
+const withCustomLoader = (nextConfig = {}) => {
+  return Object.assign({}, nextConfig, {
+    webpack(config, options) {
+      config.module.rules.push({
+        test: /\.mdx?$/,
+        use: [{ loader: path.resolve('./src/loaders/mdx-wrapper.js') }],
+      });
+
+      if (typeof nextConfig.webpack === 'function') {
+        return nextConfig.webpack(config, options);
+      }
+      return config;
+    },
+  });
+};
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -59,8 +75,8 @@ const nextConfig = {
       loader: path.resolve('./src/loaders/ipynb-loader.cjs'),
     })
     // config.module.rules.push({
-    //   test: /\.mdx$/,
-    //   use: [{loader: require.resolve('./src/loaders/mdx-wrapper.cjs')}]
+    //   test: /\.mdx?$/,
+    //   use: [{loader: require.resolve('./src/loaders/mdx-wrapper.js')}]
     // });      
     // config.module.rules.push({
     //   test: /\.mdx$/,
@@ -72,7 +88,7 @@ const nextConfig = {
     //       loader: '@next/mdx',
     //     },
     //     {
-    //       loader: require.resolve('./src/loaders/mdx-wrapper.cjs'), // Add custom loader after the MDX loader
+    //       loader: require.resolve('./src/loaders/mdx-wrapper.js'), // Add custom loader after the MDX loader
     //     },
     //   ]
     // });    
@@ -83,4 +99,4 @@ const nextConfig = {
 // if using @mdx-js/loader (commented above), a change in the file will cause a full refresh ...
 // so we prefer the withMDX syntax
 //module.exports = withMDX(nextConfig)
-export default withMDX(nextConfig);
+export default withCustomLoader(withMDX(nextConfig));

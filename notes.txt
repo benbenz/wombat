@@ -22,3 +22,9 @@ Issues:
 
 NextJS:
 - generate website 
+
+- jupyter notebook
+- descend CSS into Menu only ?
+- add reset systematic to layout ? 
+- loader after @next/mdx
+- try direct URL if loader is after ? 
