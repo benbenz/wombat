@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "wombat",
   "version": "0.1.0",
   "description": "A NextJS template for a simple academic courses website",
@@ -20,7 +19,9 @@
     "@mdx-js/react": "^2.3.0",
     "@next/mdx": "^13.2.4",
     "chokidar": "^3.5.3",
+    "highlight": "^0.2.4",
     "next": "13.2.4",
+    "notebookjs": "^0.6.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",

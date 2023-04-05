@@ -1,5 +1,6 @@
 import remarkGfm from 'remark-gfm'
 import _withMDX from '@next/mdx';
+import path from 'path'
 
 const withMDX = _withMDX({ //require('@next/mdx')({
   extension: /\.mdx?$/,
@@ -52,9 +53,14 @@ const nextConfig = {
         }
       ]
     })
+    config.module.rules.push({
+      test: /\.ipynb$/,
+      exclude: /node_modules/,
+      loader: path.resolve('./src/loaders/ipynb-loader.cjs'),
+    })
     // config.module.rules.push({
     //   test: /\.mdx$/,
-    //   use: [{loader: require.resolve('./src/loaders/mdxwrapper.js')}]
+    //   use: [{loader: require.resolve('./src/loaders/mdx-wrapper.cjs')}]
     // });      
     // config.module.rules.push({
     //   test: /\.mdx$/,
@@ -66,7 +72,7 @@ const nextConfig = {
     //       loader: '@next/mdx',
     //     },
     //     {
-    //       loader: require.resolve('./src/loaders/mdxwrapper.js'), // Add custom loader after the MDX loader
+    //       loader: require.resolve('./src/loaders/mdx-wrapper.cjs'), // Add custom loader after the MDX loader
     //     },
     //   ]
     // });    

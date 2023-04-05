@@ -19,7 +19,8 @@ export default function App({ Component, pageProps }) {
         // this one will go through the mdxwrapper loader (it's supposed to wrap in a CSS reset - doesnt work right now because it comes FIRST !!!)
         { title: "MDX direct thru" , link: "/mdx/example" } , 
         // this one will go through the mdx proxy (same file)
-        { title: "MDW with proxy" , link: "example.mdx" } , 
+        { title: "MDX with proxy" , link: "example.mdx" } , 
+        { title: "Jupyter" , link: "notebooks.ipynb" } ,
         { title: "Jupyter" , link: "ols.ipynb" } ,
         { title: "Other" , link: "/"}
       ]

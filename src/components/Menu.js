@@ -12,6 +12,8 @@ function MenuLink({children,menu,submenuOpen,setSubmenuOpen}) {
             return <Link href={"/proxy/html/"+menu.link}>{children}</Link>
         else if(menu.link.endsWith(".md") || menu.link.endsWith(".mdx"))
             return <Link href={"/proxy/mdx/"+menu.link}>{children}</Link>
+        else if(menu.link.endsWith(".ipynb"))
+            return <Link href={"/proxy/ipynb/"+menu.link}>{children}</Link>
         else
             return <Link href={menu.link}>{children}</Link>
 
