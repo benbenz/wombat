@@ -9,8 +9,8 @@ import Layout from '../components/Layout.js'
 export default function App({ Component, pageProps }) {
   const menuItems = [
     { title: "Intro" , link: "intro.html"} ,
-    { title: "Docs" , link: "/content/documents" , icon: <AiOutlineFileText/>} ,
-    { title: "Medias" , link: "/content/medias" , icon: <BsFillImageFill/> , spacing: true } ,
+    { title: "Docs" , link: "/jsx/documents" , icon: <AiOutlineFileText/>} ,
+    { title: "Medias" , link: "/jsx/medias" , icon: <BsFillImageFill/> , spacing: true } ,
     {
       title: "Examples" ,
       icon : <BsReverseLayoutTextSidebarReverse/>,

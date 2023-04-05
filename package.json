@@ -8,7 +8,8 @@
     "url": "git+https://github.com/benbenz/wombat.git"
   },
   "scripts": {
-    "dev": "node watcher.js & next dev",
+    "watchdev": "node watcher.js & next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
+    "html-loader": "^4.2.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.3.1"
   },

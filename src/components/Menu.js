@@ -8,7 +8,7 @@ import Link from 'next/link';
 function MenuLink({menu}) {
     if(menu.link) {
         if(menu.link.endsWith(".html"))
-            return <Link href={"/page/"+menu.link}>{menu.title}</Link>
+            return <Link href={"/page/html/"+menu.link}>{menu.title}</Link>
         else
             return <Link href={menu.link}>{menu.title}</Link>
 
