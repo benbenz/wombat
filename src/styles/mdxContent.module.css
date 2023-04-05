@@ -13,3 +13,9 @@
 .mdxContent>h1:first-child , .mdxContent>h2:first-child {
   margin-top: 0 ;
 }
+
+.mdxContent th, .mdxContent td , .mdxContent table {
+  border: thin solid black;
+  border-collapse: collapse;
+  padding: .1em;
+}

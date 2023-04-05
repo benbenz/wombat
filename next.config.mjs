@@ -1,10 +1,13 @@
-const withMDX = require('@next/mdx')({
+import remarkGfm from 'remark-gfm'
+import _withMDX from '@next/mdx';
+
+const withMDX = _withMDX({ //require('@next/mdx')({
   extension: /\.mdx?$/,
   options: {
     // If you use remark-gfm, you'll need to use next.config.mjs
     // as the package is ESM only
     // https://github.com/remarkjs/remark-gfm#install
-    remarkPlugins: [],
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [],
     // If you use `MDXProvider`, uncomment the following line.
     //providerImportSource: "@mdx-js/react",
@@ -51,6 +54,10 @@ const nextConfig = {
     })
     // config.module.rules.push({
     //   test: /\.mdx$/,
+    //   use: [{loader: require.resolve('./src/loaders/mdxwrapper.js')}]
+    // });      
+    // config.module.rules.push({
+    //   test: /\.mdx$/,
     //   use: [
     //     {
     //       loader: 'babel-loader',
@@ -69,5 +76,5 @@ const nextConfig = {
 // @next/mdx is only refreshing the right component with Fast Refresh
 // if using @mdx-js/loader (commented above), a change in the file will cause a full refresh ...
 // so we prefer the withMDX syntax
-module.exports = withMDX(nextConfig)
-// module.exports = nextConfig
+//module.exports = withMDX(nextConfig)
+export default withMDX(nextConfig);
