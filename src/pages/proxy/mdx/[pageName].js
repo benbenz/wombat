@@ -25,7 +25,6 @@ const MyComponent = ({ pageName }) => {
   if (!Component) {
     return <div>Loading...</div>;
   }
-
   if(addWrapper) {
     return (
       <>
@@ -41,8 +40,8 @@ const MyComponent = ({ pageName }) => {
   } else {
     return (
       <Component/>
-    )
-  } 
+    ) ;
+  }
 };
 
 const Page = () => {

@@ -20,13 +20,16 @@
     "@next/mdx": "^13.2.4",
     "chokidar": "^3.5.3",
     "highlight": "^0.2.4",
+    "katex": "^0.16.4",
     "next": "13.2.4",
-    "notebookjs": "^0.6.7",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-katex": "^3.0.1",
+    "rehype-document": "^6.1.0",
+    "rehype-katex": "^6.0.2",
     "remark-gfm": "^3.0.1",
+    "remark-math": "^5.1.1",
     "ws": "^8.13.0"
   },
   "devDependencies": {
@@ -35,6 +38,11 @@
     "babel-loader": "^9.1.2",
     "html-loader": "^4.2.0",
     "postcss": "^8.4.21",
+    "rehype-stringify": "^9.0.3",
+    "remark": "^14.0.2",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "remark-stringify": "^10.0.2",
     "tailwindcss": "^3.3.1"
   },
   "keywords": [

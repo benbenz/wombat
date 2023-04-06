@@ -23,13 +23,19 @@ module.exports = function (source) {
   const wrappedExport = `
 import styles from '../../styles/resetContent.module.css';
 
-export default function WrappedComponent(props) {
+const WrappedComponent = (props) => {
   return React.createElement(
     'div',
     { className: styles.resetContent + ' normalizedSection meyerreset' },
     React.createElement(OriginalComponent, props)
   );
-}`;
+}
+// to help with Fast Refresh
+//WrappedComponent.displayName = 'WrappedComponent';
+// to help with Fast Refresh
+//export default React.memo(WrappedComponent);
+export default WrappedComponent;
+`;
 
   // Return the modified source
   return importReact + modifiedSource + wrappedExport;

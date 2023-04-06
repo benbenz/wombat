@@ -1,4 +1,4 @@
-.resetContent > * {
+.resetContent * {
     all: revert;
 }
 /*

@@ -10,20 +10,20 @@ export default function App({ Component, pageProps }) {
   const menuItems = [
     { title: "Intro" , link: "intro.html"} ,
     { title: "Docs" , link: "/jsx/documents" , icon: <AiOutlineFileText/>} ,
-    { title: "Medias" , link: "/jsx/medias" , icon: <BsFillImageFill/> , spacing: true } ,
+    { title: "Medias" , link: "/jsx/medias?reset=1" , icon: <BsFillImageFill/> , spacing: true } ,
     {
       title: "Examples" ,
       icon : <BsReverseLayoutTextSidebarReverse/>,
       submenu: true ,
       submenuItems : [
         // this one will go through the mdxwrapper loader (it's supposed to wrap in a CSS reset - doesnt work right now because it comes FIRST !!!)
-        { title: "MD direct thru" , link: "/mdx/example" } , 
+        { title: "example1.mdx (thru)" , link: "/mdx/example1" } , 
         // this one will go through the mdx proxy (same file)
-        { title: "MD with proxy" , link: "example.md" } , 
-        { title: "MDX direct thru" , link: "/mdx/example2" } , 
-        { title: "MDX with proxy" , link: "example2.mdx" } , 
-        { title: "Jupyter" , link: "notebooks.ipynb" } ,
-        { title: "Jupyter" , link: "ols.ipynb" } ,
+        { title: "example1.mdx (proxy)" , link: "example1.mdx" } , 
+        { title: "example2.mdx (thru)" , link: "/mdx/example2" } , 
+        { title: "example3.md (thru)" , link: "/mdx/example3" } , 
+        { title: "notebooks.ipynb (thru)" , link: "/ipynb/notebooks" } ,
+        { title: "ols.ipynb (thru)" , link: "/ipynb/ols" } ,
         { title: "Other" , link: "/"}
       ]
     } ,

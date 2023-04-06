@@ -1,4 +1,8 @@
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
+import remarkRehype from 'remark-rehype'
+import rehypeKatex from 'rehype-katex'
+import rehypeDocument from 'rehype-document'
 import _withMDX from '@next/mdx';
 import path from 'path'
 
@@ -8,8 +12,8 @@ const withMDX = _withMDX({ //require('@next/mdx')({
     // If you use remark-gfm, you'll need to use next.config.mjs
     // as the package is ESM only
     // https://github.com/remarkjs/remark-gfm#install
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
+    remarkPlugins: [remarkGfm,remarkMath,remarkRehype],
+    rehypePlugins: [rehypeKatex],//,rehypeDocument],
     // If you use `MDXProvider`, uncomment the following line.
     //providerImportSource: "@mdx-js/react",
   },
@@ -34,7 +38,7 @@ const withCustomLoader = (nextConfig = {}) => {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts', 'html'],
+  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts', 'html' , 'ipynb'],
 
   webpack: (config, { isServer }) => {
     // config.module.rules.push({
@@ -72,26 +76,8 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.ipynb$/,
       exclude: /node_modules/,
-      loader: path.resolve('./src/loaders/ipynb-loader.cjs'),
-    })
-    // config.module.rules.push({
-    //   test: /\.mdx?$/,
-    //   use: [{loader: require.resolve('./src/loaders/mdx-wrapper.js')}]
-    // });      
-    // config.module.rules.push({
-    //   test: /\.mdx$/,
-    //   use: [
-    //     {
-    //       loader: 'babel-loader',
-    //     },
-    //     {
-    //       loader: '@next/mdx',
-    //     },
-    //     {
-    //       loader: require.resolve('./src/loaders/mdx-wrapper.js'), // Add custom loader after the MDX loader
-    //     },
-    //   ]
-    // });    
+      loader: path.resolve('./src/loaders/ipynb-loader.js'),
+    })  
     return config
   }
 }
@@ -99,6 +85,9 @@ const nextConfig = {
 // if using @mdx-js/loader (commented above), a change in the file will cause a full refresh ...
 // so we prefer the withMDX syntax
 //module.exports = withMDX(nextConfig)
-// with custom wrapper, the reload is full ... not elegent enough
-//export default withCustomLoader(withMDX(nextConfig));
 export default withMDX(nextConfig);
+
+// with custom MDX wrapper (to add the CSS reset), the reload is also full ... not elegent enough
+// we'll handle this business logic at the router/views level
+//export default withCustomLoader(withMDX(nextConfig));
+
