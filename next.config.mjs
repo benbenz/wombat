@@ -65,14 +65,18 @@ const nextConfig = {
     //   ]
     // })
     config.module.rules.push({
-      test: /\.html?$/,
+      test: /\.html$/,
       exclude: /node_modules/,
       use: [
+        // {
+        //   loader: 'html-loader',  
+        //     /** @type {import('html/loader').Options} */
+        //   options: {}
+        // },
         {
-          loader: 'html-loader',  
-            /** @type {import('html/loader').Options} */
+          loader: path.resolve('./src/loaders/html-jsx-loader.js'),
           options: {}
-        }
+        } 
       ]
     })
     config.module.rules.push({

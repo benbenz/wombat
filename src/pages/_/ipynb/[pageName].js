@@ -11,8 +11,8 @@ const MyComponent = ({ pageName }) => {
     if (!pageName) return;
     const loadComponent = async () => {
       const NoteBook = await import(`../../ipynb/${pageName}`);
-      console.log(NoteBook)
-      setComponent(() => NoteBook);
+      //console.log(NoteBook)
+      setComponent(() => NoteBook.default);
     };
     loadComponent();
   }, [pageName]);
@@ -20,7 +20,6 @@ const MyComponent = ({ pageName }) => {
   if (!Component) {
     return <div>Loading...</div>;
   }
-
   return (
     <>
      <Head>

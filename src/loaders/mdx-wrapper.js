@@ -1,4 +1,4 @@
-module.exports = function (source) {
+module.exports = function MDXWrapper(source) {
 
   const importReact = 'import React from "react";\n';
 
@@ -23,7 +23,7 @@ module.exports = function (source) {
   const wrappedExport = `
 import styles from '../../styles/resetContent.module.css';
 
-const WrappedComponent = (props) => {
+function WrappedComponent(props) {
   return React.createElement(
     'div',
     { className: styles.resetContent + ' normalizedSection meyerreset' },

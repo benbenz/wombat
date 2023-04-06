@@ -9,11 +9,11 @@ import React from 'react'
 function MenuLink({children,menu,submenuOpen,setSubmenuOpen}) {
     if(menu.link) {
         if(menu.link.endsWith(".html"))
-            return <Link href={"/proxy/html/"+menu.link}>{children}</Link>
+            return <Link href={"/_/html/"+menu.link}>{children}</Link>
         else if(menu.link.endsWith(".md") || menu.link.endsWith(".mdx"))
-            return <Link href={"/proxy/mdx/"+menu.link}>{children}</Link>
+            return <Link href={"/_/mdx/"+menu.link}>{children}</Link>
         else if(menu.link.endsWith(".ipynb"))
-            return <Link href={"/proxy/ipynb/"+menu.link}>{children}</Link>
+            return <Link href={"/_/ipynb/"+menu.link}>{children}</Link>
         else
             return <Link href={menu.link}>{children}</Link>
 

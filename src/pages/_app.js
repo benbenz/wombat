@@ -21,8 +21,10 @@ export default function App({ Component, pageProps }) {
         // this one will go through the mdx proxy (same file)
         { title: "example1.mdx (proxy)" , link: "example1.mdx" } , 
         { title: "example2.mdx (thru)" , link: "/mdx/example2" } , 
+        { title: "example2.mdx (proxy)" , link: "example2.mdx" } , 
         { title: "example3.md (thru)" , link: "/mdx/example3" } , 
         { title: "notebooks.ipynb (thru)" , link: "/ipynb/notebooks" } ,
+        { title: "notebooks.ipynb (proxy)" , link: "notebooks.ipynb" } ,
         { title: "ols.ipynb (thru)" , link: "/ipynb/ols" } ,
         { title: "Other" , link: "/"}
       ]
