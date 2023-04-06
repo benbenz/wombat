@@ -51,9 +51,9 @@ const processChain = unified()
 .use(remarkMath.default)
 .use(remarkRehype.default)
 .use(rehypeKatex.default)
-.use(rehypeDocument.default, {
-    css: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css'
-})
+// .use(rehypeDocument.default, {
+//     css: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css'
+// })
 .use(rehypeStringify.default)
 
   const nbJson = JSON.parse(source);
