@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* [aria-hidden=true] {
+  display: none!important;
+}
 /*
 :root {
   --max-width: 1100px;

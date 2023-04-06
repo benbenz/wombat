@@ -37,6 +37,7 @@
 
 .main {
   /*flex-basis: 75%;*/
+  @apply max-w-[75%]
 }
 
 .code {

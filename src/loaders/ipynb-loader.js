@@ -70,7 +70,7 @@ const processChain = unified()
         break
         case 'code':
           const html_code = await processChain.process(nbCell.source.join('\n'))
-          all_html = all_html + `<code class="ipynb_code">${String(html_code)}</code>`
+          all_html = all_html + `<div class="ipynb_code"><code class="ipynb_code">${String(html_code)}</code></div>`
           if(nbCell.outputs) {
             for(output of nbCell.outputs) {
               switch(output.output_type) {
@@ -99,7 +99,8 @@ const processChain = unified()
       }
   }
   //console.log("ALL HTML FINAL =",all_html)
-  all_html = `<div className="ipynb_notebook resetContent">${all_html}</div>`
+  //all_html = `<div className="ipynb_notebook resetContent">${all_html}</div>`
+  
   //let mainContainer = React.createElement("div", { className: "ipynb_notebook" },elements);  
   // notebook.styles = `
   //   ${hljs.getStyleSheet('default')}
@@ -112,12 +113,13 @@ const processChain = unified()
   //const allhtml = ReactDOMServer.renderToString(mainContainer) //ReactDOM.render(mainContainer);
   //return `export default function (props) { return return React.createElement(<div dangerouslySetInnerHTML={{ __html: \`${html}\` }}/>) }`;
   const jsx_string = `import React from "react";
+  import Head from 'next/head';
   import resetStyle from '../../styles/resetContent.module.css';
-  import ipynbStyle from '../../styles/ipynbStyle.module.css';
+  //import ipynbStyle from '../../styles/ipynbStyle.module.css';
   const html = \`${all_html.replaceAll('`','\\`')}\`;
   function ipynbComponent(props) {
     return React.createElement('div', {
-      className: resetStyle.resetContent , 
+      className: resetStyle.resetContent + ' ipynb_notebook', 
       dangerouslySetInnerHTML: { __html: html },
     });
   };

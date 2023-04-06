@@ -1,5 +1,5 @@
 import '@/styles/globals.css'
-
+import '@/styles/ipynbStyle.css'
 import { useState } from 'react' ;
 import { BsFillImageFill, BsReverseLayoutTextSidebarReverse, BsPerson} from 'react-icons/bs' ;
 import { AiOutlineFileText, AiOutlineBarChart, AiOutlineMail, AiOutlineSetting, AiOutlineLogout } from 'react-icons/ai' ;

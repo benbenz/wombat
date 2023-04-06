@@ -38,6 +38,7 @@
     "babel-loader": "^9.1.2",
     "html-loader": "^4.2.0",
     "postcss": "^8.4.21",
+    "rehype-raw": "^6.1.1",
     "rehype-stringify": "^9.0.3",
     "remark": "^14.0.2",
     "remark-parse": "^10.0.1",
