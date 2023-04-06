@@ -116,7 +116,7 @@ const processChain = unified()
   import Head from 'next/head';
   import resetStyle from '../../styles/resetContent.module.css';
   //import ipynbStyle from '../../styles/ipynbStyle.module.css';
-  const html = \`${all_html.replaceAll('`','\\`')}\`;
+  const html = \`${all_html.replace(/`/g, '\\`')}\`;
   function ipynbComponent(props) {
     return React.createElement('div', {
       className: resetStyle.resetContent + ' ipynb_notebook', 
