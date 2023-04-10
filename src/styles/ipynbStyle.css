@@ -1,7 +1,11 @@
 .ipynb_notebook div.ipynb_code {
-    background-color: #fff8e0; 
-    padding: 0.1em 1em;
-    line-height: 1;
+    background-color: #F8F8F8; 
+    padding: 1em ;
+    font-size: 90%;
+    border: thin solid lightgrey;
+    border-collapse: collapse;
+    margin-bottom: 1em;
+    /*line-height: 1;*/
 }
 .ipynb_notebook .ipynb_code p {
     margin: .2em ;

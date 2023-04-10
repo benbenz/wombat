@@ -1,9 +1,12 @@
 import remarkParse from 'remark-parse'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+// this adds a lot of compilation time !!!
+import remarkPrism from 'remark-prism'
 import remarkRehype from 'remark-rehype'
 import rehypeRaw from 'rehype-raw'
 import rehypeKatex from 'rehype-katex'
+import rehypeHighlight from 'rehype-highlight'
 import rehypeDocument from 'rehype-document'
 import _withMDX from '@next/mdx';
 import path from 'path'
@@ -14,8 +17,11 @@ const withMDX = _withMDX({ //require('@next/mdx')({
     // If you use remark-gfm, you'll need to use next.config.mjs
     // as the package is ESM only
     // https://github.com/remarkjs/remark-gfm#install
-    remarkPlugins: [remarkGfm,remarkMath,remarkRehype],
-    rehypePlugins: [rehypeKatex],//,rehypeDocument],
+
+    // !!! remarkPrism adds lots of compilation time
+    
+    remarkPlugins: [remarkGfm,remarkMath,remarkPrism,remarkRehype],
+    rehypePlugins: [rehypeKatex,rehypeHighlight],//,rehypeDocument],
     // If you use `MDXProvider`, uncomment the following line.
     //providerImportSource: "@mdx-js/react",
   },

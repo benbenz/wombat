@@ -41,9 +41,12 @@ const remarkGfm = await import('remark-gfm')
 const { unified } = await import ('unified')
 const remarkMath = await import ('remark-math')
 const remarkRehype = await import ('remark-rehype')
+const remarkPrism = await import ('remark-prism')
+const rehypeHighlight = await import ('rehype-highlight')
 const rehypeStringify = await import('rehype-stringify')
 const rehypeKatex = await import('rehype-katex')
 const rehypeDocument = await import('rehype-document')
+//const lang_python = await import('highlight/lib/vendor/highlight.js/languages/python.js')
 
 const processChain = unified()
 .use(remarkParse.default,{fragment:true})
@@ -54,6 +57,16 @@ const processChain = unified()
 // .use(rehypeDocument.default, {
 //     css: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css'
 // })
+.use(rehypeStringify.default)
+
+const processChainCode = unified()
+.use(remarkParse.default,{fragment:true})
+.use(remarkPrism.default)
+.use(remarkGfm.default)
+.use(remarkMath.default)
+.use(remarkRehype.default)
+//.use(rehypeHighlight.default,{detect:true})
+.use(rehypeKatex.default)
 .use(rehypeStringify.default)
 
   const nbJson = JSON.parse(source);
@@ -69,7 +82,8 @@ const processChain = unified()
           all_html = all_html + `<div class="ipynb_markdown">${String(html_md)}</div>`
         break
         case 'code':
-          const html_code = await processChain.process(nbCell.source.join('\n'))
+          const sourceCode = "```python\n"+nbCell.source.join('\n')+"\n```"
+          const html_code = await processChainCode.process(sourceCode)
           all_html = all_html + `<div class="ipynb_code"><code class="ipynb_code">${String(html_code)}</code></div>`
           if(nbCell.outputs) {
             for(output of nbCell.outputs) {
