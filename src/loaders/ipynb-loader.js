@@ -2,8 +2,11 @@
 React = require('react');
 ReactDOM = require( 'react-dom' );
 ReactDOMServer = require( 'react-dom/server' );
+const Prism = require('prismjs');
+require('prismjs/components/prism-python');
 // const fs = require('fs');
 // const hljs = require('highlight');
+const hljs = require('highlight.js');
 
 
 // http://ipython.org/ipython-doc/3/notebook/nbformat.html
@@ -69,8 +72,9 @@ const processChainCode = unified()
 .use(rehypeKatex.default)
 .use(rehypeStringify.default)
 
-  const nbJson = JSON.parse(source);
-  let all_html = ""
+const nbJson = JSON.parse(source);
+let all_html = ""
+const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspec.language : "python"
   for(nbCell of nbJson.cells) { 
       switch(nbCell.cell_type) {
         case 'markdown' :
@@ -82,9 +86,13 @@ const processChainCode = unified()
           all_html = all_html + `<div class="ipynb_markdown">${String(html_md)}</div>`
         break
         case 'code':
-          const sourceCode = "```python\n"+nbCell.source.join('\n')+"\n```"
-          const html_code = await processChainCode.process(sourceCode)
-          all_html = all_html + `<div class="ipynb_code"><code class="ipynb_code">${String(html_code)}</code></div>`
+          //const sourceCode = "```"+language+"\n"+nbCell.source.join('\n')+"\n```"
+          const sourceCode = nbCell.source.join('\n')
+          //const html_code = await processChainCode.process(sourceCode)
+          //const html_code = hljs.highlight(sourceCode,{language:language})
+          const html_code = Prism.highlight(sourceCode, Prism.languages[language], language);
+          //all_html = all_html + `<div class="ipynb_code"><code class="ipynb_code">${String(html_code)}</code></div>`
+          all_html = all_html + `<div class="ipynb_code"><pre class="language-${language}><code class="language-${language}">${String(html_code)}</code></pre></div>`
           if(nbCell.outputs) {
             for(output of nbCell.outputs) {
               switch(output.output_type) {
@@ -130,6 +138,7 @@ const processChainCode = unified()
   import Head from 'next/head';
   import resetStyle from '../../styles/resetContent.module.css';
   //import ipynbStyle from '../../styles/ipynbStyle.module.css';
+  import 'prismjs/themes/prism.css';
   const html = \`${all_html.replace(/`/g, '\\`')}\`;
   function ipynbComponent(props) {
     return React.createElement('div', {

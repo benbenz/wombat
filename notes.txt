@@ -28,3 +28,12 @@ NextJS:
 - add reset systematic to layout ? 
 - loader after @next/mdx
 - try direct URL if loader is after ? 
+
+
+
+- add tags to class name
+- ipynb raw = html ou text
+- daisyUI (TailWind CSS) - Drawer
+- typography tailwind also 
+- MDXProvider
+- highlight.js 
