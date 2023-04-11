@@ -61,11 +61,11 @@ const processChain = unified()
 
 const processChainCode = unified()
 .use(remarkParse.default,{fragment:true})
-.use(remarkPrism.default)
+//.use(remarkPrism.default)
 .use(remarkGfm.default)
 .use(remarkMath.default)
 .use(remarkRehype.default)
-//.use(rehypeHighlight.default,{detect:true})
+.use(rehypeHighlight.default,{detect:true})
 .use(rehypeKatex.default)
 .use(rehypeStringify.default)
 

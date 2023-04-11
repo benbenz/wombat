@@ -5,7 +5,7 @@
     border: thin solid lightgrey;
     border-collapse: collapse;
     margin-bottom: 1em;
-    /*line-height: 1;*/
+    line-height: 0.9;
 }
 .ipynb_notebook .ipynb_code p {
     margin: .2em ;
