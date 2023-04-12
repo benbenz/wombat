@@ -6,8 +6,8 @@ const Prism = require('prismjs');
 require('prismjs/components/prism-python');
 // const fs = require('fs');
 // const hljs = require('highlight');
-const hljs = require('highlight.js');
-
+//const hljs = require('highlight.js');
+const shiki = require('shiki')
 
 // http://ipython.org/ipython-doc/3/notebook/nbformat.html
 
@@ -45,11 +45,13 @@ const { unified } = await import ('unified')
 const remarkMath = await import ('remark-math')
 const remarkRehype = await import ('remark-rehype')
 const remarkPrism = await import ('remark-prism')
-const rehypeHighlight = await import ('rehype-highlight')
+//const rehypeHighlight = await import ('rehype-highlight')
 const rehypeStringify = await import('rehype-stringify')
 const rehypeKatex = await import('rehype-katex')
-const rehypeDocument = await import('rehype-document')
+//const rehypeDocument = await import('rehype-document')
 //const lang_python = await import('highlight/lib/vendor/highlight.js/languages/python.js')
+
+const shikiHighlighter = await shiki.getHighlighter({theme: 'dark-plus'})
 
 const processChain = unified()
 .use(remarkParse.default,{fragment:true})
@@ -68,7 +70,7 @@ const processChainCode = unified()
 .use(remarkGfm.default)
 .use(remarkMath.default)
 .use(remarkRehype.default)
-.use(rehypeHighlight.default,{detect:true})
+//.use(rehypeHighlight.default,{detect:true})
 .use(rehypeKatex.default)
 .use(rehypeStringify.default)
 
@@ -86,13 +88,20 @@ const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspe
           all_html = all_html + `<div class="ipynb_markdown">${String(html_md)}</div>`
         break
         case 'code':
+          // processChain
           //const sourceCode = "```"+language+"\n"+nbCell.source.join('\n')+"\n```"
+          // PrismJS + ShikiJS
           const sourceCode = nbCell.source.join('\n')
           //const html_code = await processChainCode.process(sourceCode)
           //const html_code = hljs.highlight(sourceCode,{language:language})
-          const html_code = Prism.highlight(sourceCode, Prism.languages[language], language);
+          //const html_code = Prism.highlight(sourceCode, Prism.languages[language], language);
+          const html_code = shikiHighlighter.codeToHtml(sourceCode,{lang:language})
+          // processChain
           //all_html = all_html + `<div class="ipynb_code"><code class="ipynb_code">${String(html_code)}</code></div>`
-          all_html = all_html + `<div class="ipynb_code"><pre class="language-${language}><code class="language-${language}">${String(html_code)}</code></pre></div>`
+          // PrismJS
+          //all_html = all_html + `<div class="ipynb_code"><pre class="language-${language}><code class="language-${language}">${String(html_code)}</code></pre></div>`
+          // ShikiJS
+          all_html = all_html + `<div class="ipynb_code">${String(html_code)}</div>`
           if(nbCell.outputs) {
             for(output of nbCell.outputs) {
               switch(output.output_type) {
@@ -138,7 +147,7 @@ const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspe
   import Head from 'next/head';
   import resetStyle from '../../styles/resetContent.module.css';
   //import ipynbStyle from '../../styles/ipynbStyle.module.css';
-  import 'prismjs/themes/prism.css';
+  //import 'prismjs/themes/prism.css';
   const html = \`${all_html.replace(/`/g, '\\`')}\`;
   function ipynbComponent(props) {
     return React.createElement('div', {

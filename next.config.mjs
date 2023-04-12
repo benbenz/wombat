@@ -6,7 +6,7 @@ import remarkPrism from 'remark-prism'
 import remarkRehype from 'remark-rehype'
 import rehypeRaw from 'rehype-raw'
 import rehypeKatex from 'rehype-katex'
-import rehypeHighlight from 'rehype-highlight'
+//import rehypeHighlight from 'rehype-highlight'
 import rehypeDocument from 'rehype-document'
 import _withMDX from '@next/mdx';
 import path from 'path'
@@ -21,7 +21,7 @@ const withMDX = _withMDX({ //require('@next/mdx')({
     // !!! remarkPrism adds lots of compilation time
     
     remarkPlugins: [remarkGfm,remarkMath,remarkPrism,remarkRehype],
-    rehypePlugins: [rehypeKatex,rehypeHighlight],//,rehypeDocument],
+    rehypePlugins: [rehypeKatex],//,rehypeHighlight],//,rehypeDocument],
     // If you use `MDXProvider`, uncomment the following line.
     //providerImportSource: "@mdx-js/react",
   },
