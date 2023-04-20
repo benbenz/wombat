@@ -6,6 +6,8 @@ import remarkPrism from 'remark-prism'
 import remarkRehype from 'remark-rehype'
 import rehypeRaw from 'rehype-raw'
 import rehypeKatex from 'rehype-katex'
+import mdxProviderWrapper from './src/plugins/mdx-provider-wrapper.js'
+import remarkSpecials from './src/plugins/remark-specials.mjs'
 //import rehypeHighlight from 'rehype-highlight'
 import rehypeDocument from 'rehype-document'
 import _withMDX from '@next/mdx';
@@ -20,13 +22,14 @@ const withMDX = _withMDX({ //require('@next/mdx')({
 
     // !!! remarkPrism adds lots of compilation time
     
-    remarkPlugins: [remarkGfm,remarkMath,remarkPrism,remarkRehype],
-    rehypePlugins: [rehypeKatex],//,rehypeHighlight],//,rehypeDocument],
+    remarkPlugins: [remarkGfm,remarkMath,remarkPrism,remarkRehype,remarkSpecials],
+    rehypePlugins: [rehypeKatex],//,mdxProviderWrapper],//,rehypeHighlight],//,rehypeDocument],
     // If you use `MDXProvider`, uncomment the following line.
-    //providerImportSource: "@mdx-js/react",
+    providerImportSource: "@mdx-js/react"
   },
 })
 
+/*
 const withCustomLoader = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
     webpack(config, options) {
@@ -42,6 +45,7 @@ const withCustomLoader = (nextConfig = {}) => {
     },
   });
 };
+*/
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -88,7 +92,10 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.ipynb$/,
       exclude: /node_modules/,
-      loader: path.resolve('./src/loaders/ipynb-loader.js'),
+      use : [
+        //{ loader: 'babel-loader' , options: { presets: ['next/babel','@babel/preset-react']}} ,
+        { loader: path.resolve('./src/loaders/ipynb-loader.js')}
+      ]
     })  
     return config
   }

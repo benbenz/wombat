@@ -7,6 +7,10 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import resetStyle from '../styles/resetContent.module.css';
 
+import { MDXProvider } from '@mdx-js/react';
+import MDXComponents from '../components/MDXComponents';
+
+
 const Layout = ({ children , title, menuItems }) => {
     const [open,setOpen] = useState(true)
     const router = useRouter();
@@ -16,6 +20,10 @@ const Layout = ({ children , title, menuItems }) => {
       ) {
       doReset = true
     } 
+
+    // Now using MDXProvider so we can avoid the reset
+    doReset = false
+
     return (
     <div className="flex">
     
@@ -37,7 +45,9 @@ const Layout = ({ children , title, menuItems }) => {
         <main className={styles.main+" "}>
             <div className="p-7">
               <div className={doReset ? resetStyle.resetContent : undefined}>
-                  {children}
+                  <MDXProvider components={MDXComponents}>
+                    {children}
+                  </MDXProvider>
               </div>
             </div>
         </main>

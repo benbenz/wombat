@@ -32,7 +32,9 @@ const MyComponent = ({ pageName }) => {
         {/* <NormalizedSection/>
         <MeyerReset/> */}
       </Head>
-      <div className={styles.resetContent+' normalizedSection meyerreset'}>
+      {/* now using MDXProvider ...
+      <div className={styles.resetContent+' normalizedSection meyerreset'}>*/}
+      <div>
         <Component/>
       </div>
       </>

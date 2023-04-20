@@ -8,6 +8,8 @@ require('prismjs/components/prism-python');
 // const hljs = require('highlight');
 //const hljs = require('highlight.js');
 const shiki = require('shiki')
+const { Buffer } = require('node:buffer');
+const runtime = require('react/jsx-runtime')
 
 // http://ipython.org/ipython-doc/3/notebook/nbformat.html
 
@@ -48,16 +50,31 @@ const remarkPrism = await import ('remark-prism')
 //const rehypeHighlight = await import ('rehype-highlight')
 const rehypeStringify = await import('rehype-stringify')
 const rehypeKatex = await import('rehype-katex')
+const remarkSpecials = await import('../plugins/remark-specials.mjs')
+const mdxProviderWrapper = require('../plugins/mdx-provider-wrapper.js')
 //const rehypeDocument = await import('rehype-document')
 //const lang_python = await import('highlight/lib/vendor/highlight.js/languages/python.js')
-
 const shikiHighlighter = await shiki.getHighlighter({theme: 'dark-plus'})
+
+// same chain
+const {createProcessor} = await import('@mdx-js/mdx')
+const proc_options = {
+  remarkPlugins: [remarkGfm,remarkMath,remarkPrism,remarkRehype,remarkSpecials],
+  rehypePlugins: [rehypeKatex],//,mdxProviderWrapper],//,rehypeHighlight],//,rehypeDocument],
+  providerImportSource: "@mdx-js/react",
+  outputFormat: 'function-body',
+  //useDynamicImport: true
+}
+const mdxproc = createProcessor(proc_options)
+//console.log(mdxproc)
 
 const processChain = unified()
 .use(remarkParse.default,{fragment:true})
 .use(remarkGfm.default)
 .use(remarkMath.default)
-.use(remarkRehype.default)
+.use(remarkSpecials.default)
+.use(remarkRehype.default,{ allowDangerousHtml: true })
+//.use(mdxProviderWrapper)
 .use(rehypeKatex.default)
 // .use(rehypeDocument.default, {
 //     css: 'https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css'
@@ -76,10 +93,31 @@ const processChainCode = unified()
 
 const nbJson = JSON.parse(source);
 let all_html = ""
+let all_jsx = ""
+let mdx_block_counter = 1
+var jsx_block = ''
 const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspec.language : "python"
   for(nbCell of nbJson.cells) { 
       switch(nbCell.cell_type) {
         case 'markdown' :
+          try {
+            const buf = Buffer.from(nbCell.source.join('\n'), 'utf8');
+            jsx_block = String(await mdxproc.process(buf))
+            jsx_block = jsx_block.replace(/const\s*{.*}\s*=\s*arguments\[0\]\s*;/g,'')
+            jsx_block = jsx_block.replace(/export default MDXContent;/g,'')
+            jsx_block = jsx_block.replace(/return\s*{\s*default\s*:\s*MDXContent\s*}\s*;/g,'')
+            jsx_block = jsx_block.replace(/MDXContent/g,`MDXContent${mdx_block_counter}`)
+            jsx_block = jsx_block.replace(/_createMdxContent/g,`_createMdxContent${mdx_block_counter}`)
+            //jsx_block = `\n{\n${jsx_block}\n}\n`
+            mdx_block_counter++
+            //console.log("\n============== NEW COMP =================\n");
+            //console.log(jsx_block)
+            all_jsx = all_jsx + jsx_block
+            //var MDXComponent = await mdxproc.run(jsx_block,runtime)
+            //console.log(MDXComponent)
+          } catch(err) {
+            console.error(err)
+          }
           //mdxSourceJsx = mdx.runSync(nbCell.source.join(''))
           //mdxSource = mdx.compileSync(nbCell.source.join(''))
           //console.log(mdxSourceJsx)
@@ -88,20 +126,35 @@ const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspe
           all_html = all_html + `<div class="ipynb_markdown">${String(html_md)}</div>`
         break
         case 'code':
+
           // processChain
           //const sourceCode = "```"+language+"\n"+nbCell.source.join('\n')+"\n```"
           // PrismJS + ShikiJS
           const sourceCode = nbCell.source.join('\n')
           //const html_code = await processChainCode.process(sourceCode)
           //const html_code = hljs.highlight(sourceCode,{language:language})
-          //const html_code = Prism.highlight(sourceCode, Prism.languages[language], language);
-          const html_code = shikiHighlighter.codeToHtml(sourceCode,{lang:language})
+          const html_code = Prism.highlight(sourceCode, Prism.languages[language], language);
+          //const html_code = shikiHighlighter.codeToHtml(sourceCode,{lang:language})
           // processChain
           //all_html = all_html + `<div class="ipynb_code"><code class="ipynb_code">${String(html_code)}</code></div>`
           // PrismJS
-          //all_html = all_html + `<div class="ipynb_code"><pre class="language-${language}><code class="language-${language}">${String(html_code)}</code></pre></div>`
+          inner_pre = `<pre class="language-${language}><code class="language-${language}">${String(html_code)}</code></pre>`
+          all_html = all_html + `<div class="ipynb_code">${inner_pre}</div>`
+
+          jsx_block = `
+          function MDXContent${mdx_block_counter}(props) {
+            const html = \`${inner_pre.replace(/`/g, '\\`')}\`;
+            return React.createElement('div', {
+              className: 'ipynb_code',
+              dangerouslySetInnerHTML: { __html: html },
+            });
+          };        
+          `;
+          mdx_block_counter++
+          all_jsx = all_jsx + jsx_block
+
           // ShikiJS
-          all_html = all_html + `<div class="ipynb_code">${String(html_code)}</div>`
+          //all_html = all_html + `<div class="ipynb_code">${String(html_code)}</div>`
           if(nbCell.outputs) {
             for(output of nbCell.outputs) {
               switch(output.output_type) {
@@ -143,22 +196,52 @@ const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspe
   // });
   //const allhtml = ReactDOMServer.renderToString(mainContainer) //ReactDOM.render(mainContainer);
   //return `export default function (props) { return return React.createElement(<div dangerouslySetInnerHTML={{ __html: \`${html}\` }}/>) }`;
+
+  var mdxCompsArray = 'const _all_components = [' ;
+  for(let i=1 ; i<mdx_block_counter ; i++)
+      mdxCompsArray += (i>1 ? ', ' : '') + `MDXContent${i}()` ;
+  mdxCompsArray += "];"
+  
   const jsx_string = `import React from "react";
   import Head from 'next/head';
-  import resetStyle from '../../styles/resetContent.module.css';
+  //import resetStyle from '../../styles/resetContent.module.css';
   //import ipynbStyle from '../../styles/ipynbStyle.module.css';
-  //import 'prismjs/themes/prism.css';
+  // needed by the elements added by the MDXProviderWrapper
+  import { MDXProvider } from '@mdx-js/react';
+  import MDXComponents from '../../components/MDXComponents';
+  import prismCss from 'prismjs/themes/prism.css';
+  import {Fragment as _Fragment , jsxDEV as _jsxDEV , jsx as _jsx, jsxs as _jsxs} from 'react/jsx-dev-runtime';
+  import {useMDXComponents as _provideComponents} from '@mdx-js/react';
   const html = \`${all_html.replace(/`/g, '\\`')}\`;
-  function ipynbComponent(props) {
+
+  ${all_jsx}
+
+  // function WrappedIpynbComponent(props) {
+  // ${mdxCompsArray}
+  // return React.createElement(MDXProvider, { children: _all_components });    
+  // }
+  // WrappedIpynbComponent.displayName = 'WrappedIpynbComponent';
+  // export default WrappedIpynbComponent;
+
+  function IpynbComponent(props) {
     return React.createElement('div', {
-      className: resetStyle.resetContent + ' ipynb_notebook', 
+      //className: resetStyle.resetContent + ' ipynb_notebook', 
+      className: 'ipynb_notebook',
       dangerouslySetInnerHTML: { __html: html },
     });
   };
-  ipynbComponent.displayName = 'ipynbComponent';
-  //export default React.memo(ipynbComponent);
-  export default ipynbComponent;
+  IpynbComponent.displayName = 'ipynbComponent';
+  export default IpynbComponent;
+
+  // const WrappedIpynbComponent = (props) => (
+  //   <MDXProvider components={MDXComponents}>
+  //     <IpynbComponent {...props} />
+  //   </MDXProvider>
+  // );
+  
+  // WrappedIpynbComponent.displayName = 'WrappedIpynbComponent';
+  // export default WrappedIpynbComponent;
   `
-  //console.log(jsx_string)
+  console.log(jsx_string)
   return jsx_string
 };
