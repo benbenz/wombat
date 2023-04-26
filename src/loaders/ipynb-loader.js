@@ -184,7 +184,7 @@ module.exports = async function (source) {
           // mdx_block_counter++
           // all_jsx = all_jsx + jsx_block
 
-          _all_mdx += "\n```"+language+"\n"+nbCell.source.join('\n')+"\n```"
+          _all_mdx += "\n```"+language+"\n"+nbCell.source.join('\n')+"\n```\n"
 
           // ShikiJS
           //all_html = all_html + `<div class="ipynb_code">${String(html_code)}</div>`
@@ -193,14 +193,14 @@ module.exports = async function (source) {
               switch(output.output_type) {
                 case "stream":
                     //all_html = all_html + `<div class="ipynb_ouput ipynb_text">${output.text.join('\n')}</div>`
-                    _all_mdx += "\n```console\n"+output.text.join('\n')+"\n```"
+                    _all_mdx += "\n```console\n"+output.text.join('\n')+"\n```\n"
                 break
                 case "display_data":
                 case "execute_result":
                     if(output.data['text/plain']) {
                       let display_text = output.data['text/plain'].join('\n') ;
                       display_html = display_text ;
-                      _all_mdx += "\n```console\n"+display_text+"\n```"
+                      _all_mdx += "\n```console\n"+display_text+"\n```\n"
                     }
                     else if(output.data['text/html']) {
                       display_html = output.data['text/html'].join('\n') ;
