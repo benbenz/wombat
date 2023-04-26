@@ -8,7 +8,7 @@ import Link from 'next/link';
 import resetStyle from '../styles/resetContent.module.css';
 
 import { MDXProvider } from '@mdx-js/react';
-import MDXComponents from '../components/MDXComponents';
+import MDXComponents from './MDXComponents.js';
 
 
 const Layout = ({ children , title, menuItems }) => {
