@@ -24,7 +24,7 @@ const MyComponent = ({ pageName }) => {
     <>
      <Head>
     </Head>
-    <div className={styles.resetContent+' normalizedSection reset'}>
+    <div>
       <Component />
     </div>
     </>

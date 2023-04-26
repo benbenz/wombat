@@ -1,9 +1,9 @@
 // pages/page/[pageName].js
 import { useRouter } from 'next/router';
 import React, { useState, useEffect , useRef } from 'react';
-import styles from '../../../styles/resetContent.module.css';
-import NormalizedSection from '../../../styles/normalize.module.css'
-import MeyerReset from '../../../styles/meyerreset.module.css'
+// import styles from '../../../styles/resetContent.module.css';
+// import NormalizedSection from '../../../styles/normalize.module.css'
+// import MeyerReset from '../../../styles/meyerreset.module.css'
 import Head from 'next/head';
 
 const MyComponent = ({ pageName }) => {

@@ -54,6 +54,7 @@ module.exports = async function (source) {
   const remarkMath = await import ('remark-math')
   const remarkRehype = await import ('remark-rehype')
   const remarkPrism = await import ('remark-prism')
+  const remarkDirective = await import ('remark-directive')
   //const rehypeHighlight = await import ('rehype-highlight')
   const rehypeStringify = await import('rehype-stringify')
   const rehypeKatex = await import('rehype-katex')
@@ -69,7 +70,7 @@ module.exports = async function (source) {
   // same chain
   const {createProcessor} = await import('@mdx-js/mdx')
   const proc_options = {
-    remarkPlugins: [remarkGfm.default,remarkMath.default,remarkPrism.default,remarkRehype.default,remarkSpecials.default],
+    remarkPlugins: [remarkGfm.default,remarkDirective.default,remarkMath.default,remarkPrism.default,remarkRehype.default,remarkSpecials.default],
     rehypePlugins: [rehypeKatex.default],//,mdxProviderWrapper],//,rehypeHighlight],//,rehypeDocument],
     providerImportSource: "@mdx-js/react",
     //outputFormat: 'function-body',
@@ -184,7 +185,7 @@ module.exports = async function (source) {
           // mdx_block_counter++
           // all_jsx = all_jsx + jsx_block
 
-          _all_mdx += "\n```"+language+"\n"+nbCell.source.join('\n')+"\n```\n"
+          _all_mdx += "\n:::div{.ipynbcode}\n```"+language+"\n"+nbCell.source.join('\n')+"\n```\n:::\n"
 
           // ShikiJS
           //all_html = all_html + `<div class="ipynb_code">${String(html_code)}</div>`
