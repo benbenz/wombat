@@ -69,8 +69,8 @@ module.exports = async function (source) {
   // same chain
   const {createProcessor} = await import('@mdx-js/mdx')
   const proc_options = {
-    remarkPlugins: [remarkGfm,remarkMath,remarkPrism,remarkRehype,remarkSpecials],
-    rehypePlugins: [rehypeKatex],//,mdxProviderWrapper],//,rehypeHighlight],//,rehypeDocument],
+    remarkPlugins: [remarkGfm.default,remarkMath.default,remarkPrism.default,remarkRehype.default,remarkSpecials.default],
+    rehypePlugins: [rehypeKatex.default],//,mdxProviderWrapper],//,rehypeHighlight],//,rehypeDocument],
     providerImportSource: "@mdx-js/react",
     //outputFormat: 'function-body',
     //useDynamicImport: true
@@ -152,36 +152,39 @@ module.exports = async function (source) {
           //mdxSource = mdx.compileSync(nbCell.source.join(''))
           //console.log(mdxSourceJsx)
           //mdxSource    = React.createElement(mdxSourceJsx.default)
-          const html_md = await processChain.process(nbCell.source.join('\n'))
-          all_html = all_html + `<div class="ipynb_markdown">${String(html_md)}</div>`
+
+          // const html_md = await processChain.process(nbCell.source.join('\n'))
+          // all_html = all_html + `<div class="ipynb_markdown">${String(html_md)}</div>`
         break
         case 'code':
 
           // processChain
           //const sourceCode = "```"+language+"\n"+nbCell.source.join('\n')+"\n```"
           // PrismJS + ShikiJS
-          const sourceCode = nbCell.source.join('\n')
+          // const sourceCode = nbCell.source.join('\n')
           //const html_code = await processChainCode.process(sourceCode)
           //const html_code = hljs.highlight(sourceCode,{language:language})
-          const html_code = Prism.highlight(sourceCode, Prism.languages[language], language);
+          // const html_code = Prism.highlight(sourceCode, Prism.languages[language], language);
           //const html_code = shikiHighlighter.codeToHtml(sourceCode,{lang:language})
           // processChain
           //all_html = all_html + `<div class="ipynb_code"><code class="ipynb_code">${String(html_code)}</code></div>`
           // PrismJS
-          inner_pre = `<pre class="language-${language}><code class="language-${language}">${String(html_code)}</code></pre>`
-          all_html = all_html + `<div class="ipynb_code">${inner_pre}</div>`
+          // inner_pre = `<pre class="language-${language}><code class="language-${language}">${String(html_code)}</code></pre>`
+          // all_html = all_html + `<div class="ipynb_code">${inner_pre}</div>`
 
-          jsx_block = `
-          function MDXContent${mdx_block_counter}(props) {
-            const html = \`${inner_pre.replace(/`/g, '\\`')}\`;
-            return React.createElement('div', {
-              className: 'ipynb_code',
-              dangerouslySetInnerHTML: { __html: html },
-            });
-          };        
-          `;
-          mdx_block_counter++
-          all_jsx = all_jsx + jsx_block
+          // jsx_block = `
+          // function MDXContent${mdx_block_counter}(props) {
+          //   const html = \`${inner_pre.replace(/`/g, '\\`')}\`;
+          //   return React.createElement('div', {
+          //     className: 'ipynb_code',
+          //     dangerouslySetInnerHTML: { __html: html },
+          //   });
+          // };        
+          // `;
+          // mdx_block_counter++
+          // all_jsx = all_jsx + jsx_block
+
+          _all_mdx += "\n```"+language+"\n"+nbCell.source.join('\n')+"\n```"
 
           // ShikiJS
           //all_html = all_html + `<div class="ipynb_code">${String(html_code)}</div>`
@@ -189,16 +192,26 @@ module.exports = async function (source) {
             for(output of nbCell.outputs) {
               switch(output.output_type) {
                 case "stream":
-                    all_html = all_html + `<div class="ipynb_ouput ipynb_text">${output.text.join('\n')}</div>`
+                    //all_html = all_html + `<div class="ipynb_ouput ipynb_text">${output.text.join('\n')}</div>`
+                    _all_mdx += "\n```console\n"+output.text.join('\n')+"\n```"
                 break
                 case "display_data":
                 case "execute_result":
-                    let display_html = output.data['text/plain'] ? output.data['text/plain'].join('\n') : ''
-                    if(output.data['image/png']) {
-                      let img_html = `<img src="data:image/png;base64,${output.data['image/png']}"/>`
-                      display_html += '\n' + img_html
+                    if(output.data['text/plain']) {
+                      let display_text = output.data['text/plain'].join('\n') ;
+                      display_html = display_text ;
+                      _all_mdx += "\n```console\n"+display_text+"\n```"
                     }
-                    all_html = all_html + `<div class="ipynb_ouput ipynb_display_result">${display_html}</div>`
+                    else if(output.data['text/html']) {
+                      display_html = output.data['text/html'].join('\n') ;
+                      _all_mdx += "\n"+display_html+"\n"
+                    }
+                    else if(output.data['image/png']) {
+                      let img_html = `<img src="data:image/png;base64,${output.data['image/png']}"/>`
+                      //display_html += '\n' + img_html
+                      _all_mdx += img_html ;
+                    }
+                    //all_html = all_html + `<div class="ipynb_ouput ipynb_display_result">${display_html}</div>`
                 break
                 case "raw":
 
@@ -246,6 +259,7 @@ module.exports = async function (source) {
 
   try {
     const buf = Buffer.from(_all_mdx, 'utf8');
+    console.log(_all_mdx)
     all_jsx = String(await mdxproc.process(buf))
     //console.log(all_jsx)
   } catch(error) {
