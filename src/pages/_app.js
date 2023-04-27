@@ -1,11 +1,8 @@
 import '@/styles/globals.css'
 import '@/styles/ipynbStyle.css'
-//import '@/styles/theme.prism.css'
-//import 'highlight.js/styles/default.css';
-import { useState } from 'react' ;
 import { BsFillImageFill, BsReverseLayoutTextSidebarReverse, BsPerson} from 'react-icons/bs' ;
 import { AiOutlineFileText, AiOutlineBarChart, AiOutlineMail, AiOutlineSetting, AiOutlineLogout } from 'react-icons/ai' ;
-import Layout from '../components/Layout.js'
+import Layout from '../components/LayoutDaisy.js'
 
 
 export default function App({ Component, pageProps }) {

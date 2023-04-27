@@ -5,7 +5,6 @@ import { AiFillEnvironment} from 'react-icons/ai' ;
 import styles from '../styles/Layout.module.css';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-//import resetStyle from '../styles/resetContent.module.css';
 
 import { MDXProvider } from '@mdx-js/react';
 import MDXComponents from './MDXComponents.js';
@@ -40,7 +39,7 @@ const Layout = ({ children , title, menuItems }) => {
 
         <Menu open={open} menuItems={menuItems}/>
 
-        </div>{/* wrapper */}
+        </div>{/* leftbar */}
     
         <main className={styles.main+" "}>
             <div className="p-7">
