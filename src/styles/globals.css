@@ -9,3 +9,62 @@
 li p {
   display: inline-block;
 }
+
+
+/* Layout 2 */
+
+.open .leftbar {
+  @apply w-72 ;
+}
+.closed .leftbar {
+  @apply w-20 ;
+}
+
+:root {
+  --is-mobile: 0;
+}
+
+@media only screen and (orientation: landscape) {
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  :root {
+    --is-mobile: 1;
+  }
+  main {
+    @apply w-full absolute mt-[4em] z-10;
+  }
+  .l2_container {
+    @apply flex-col ;
+  }
+  .menuarrow {
+    @apply hidden ;
+  }
+  .leftbar {
+    @apply fixed z-20;
+  }
+  .open .leftbar {
+    @apply w-screen absolute ;
+  }
+  .mainTitle {
+    @apply scale-100 w-auto !important ;
+  }
+  .closed .leftbar {
+    @apply w-screen min-h-0;
+  }
+  .closed .leftbar .menuItems {
+    @apply hidden !important ;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+} 

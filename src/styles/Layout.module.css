@@ -1,5 +1,5 @@
 .leftbar {
-  @apply bg-dark-purple h-fit p-5 pt-8 relative duration-300 ;
+  @apply bg-dark-purple h-fit min-h-screen p-4 pt-6 relative duration-300 ;
 }
 
 .logo {
@@ -17,7 +17,7 @@
 .menuarrow {
   @apply bg-white 
           text-dark-purple text-3xl rounded-full 
-          absolute -right-3 top-9 
+          absolute -right-3 top-7 
           border border-dark-purple 
           cursor-pointer 
           duration-500 ;
@@ -37,10 +37,11 @@
 
 .main {
   /*flex-basis: 75%;*/
-  @apply max-w-[75%]
+  /*@apply max-w-[75%]*/
 }
 
 .code {
   font-weight: 700;
   font-family: var(--font-mono);
 }
+

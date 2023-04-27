@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import styles from '../styles/Layout.module.css';
 
 import { BsArrowLeftShort , BsSearch , BsChevronDown } from 'react-icons/bs' 
-import { AiFillEnvironment} from 'react-icons/ai' ;
-import Link from 'next/link';
+import { AiFillEnvironment, AiOutlineMenu } from 'react-icons/ai' ;
 import { MDXProvider } from '@mdx-js/react';
 import MDXComponents from './MDXComponents.js';
 import Menu from '../components/Menu.js';
+import Link from 'next/link';
 
 const Layout = ({ children , title, menuItems }) => {
     const [open,setOpen] = useState(true)
@@ -16,19 +16,14 @@ const Layout = ({ children , title, menuItems }) => {
     const checkbox = useRef();
 
     // this will bind the Drawer mechanics with our initial menu mechanics ...
-    const handleChange = () => {
-      setOpen(checkbox.current.checked)
-    }
-
-    const setMenuOpen = (bool) => {
-      setOpen(bool) ;
-      checkbox.current.checked = false ;
+    const handleChange = (event) => {
+      setOpen(event.target.checked)
     }
 
     return (
 
       <div className="drawer">
-        <input id="my-drawer" type="checkbox" className="drawer-toggle" onChange={handleChange} ref={checkbox}/>
+        <input id="my-drawer" type="checkbox" className="drawer-toggle" onChange={handleChange} checked={open}/>
         <div className="drawer-content">
           <label htmlFor="my-drawer" className="btn btn-primary drawer-button">Open drawer</label>
           <main className={styles.main+" "}>
@@ -41,18 +36,21 @@ const Layout = ({ children , title, menuItems }) => {
             </div>
           </main>
         </div> 
-        <div className={"drawer-side "+styles.leftbar+` ${open ? "w-72" : "w-20"}`}>
+        {/*<div className={"drawer-side "+styles.leftbar+` ${open ? "w-72" : "w-20"}`}>*/}
+        <div className={"drawer-side"}>
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <BsArrowLeftShort htmlFor="my-drawer" className={"drawer-button " + styles.menuarrow + ` ${!open && "rotate-180"}`} onClick={ ()=> setMenuOpen(!open) }/>
+          <BsArrowLeftShort htmlFor="my-drawer" className={styles.menuarrow + ` ${!open && "rotate-180 hidden"}`} onClick={ ()=> setOpen(!open) }/>
           <div className={styles.wrapper}>
-            <AiFillEnvironment className={styles.logo+ ` ${!open && "rotate-[360deg]"}`}/>
+            <AiOutlineMenu className={styles.logo+ ` ${!open && "rotate-[360deg]"}`} onClick={()=>setOpen(!open)}/>
             <Link href="/"><h1 className={styles.maintitle+ ` ${!open && "scale-0 width-0"}`}>{title}</h1></Link>
           </div>
+          {/*
           <div className={styles.searchitem+` ${!open?"px-2.5":"px-4"}`}>
             <BsSearch className={styles.searchicon+ ` ${open && "mr-2"}`}/>
             <input className={styles.searchinput+` ${!open && "hidden"}` } type={"search"} placeholder="Search"/>
           </div>
-          <Menu open={open} menuItems={menuItems}/>
+          */}
+          <Menu open={open} menuItems={menuItems} className={`${!open && "scale-0 width-0 height-0 hidden"}`}/>
         </div>
       </div>      
     )

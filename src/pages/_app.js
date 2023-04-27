@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 import '@/styles/ipynbStyle.css'
 import { BsFillImageFill, BsReverseLayoutTextSidebarReverse, BsPerson} from 'react-icons/bs' ;
 import { AiOutlineFileText, AiOutlineBarChart, AiOutlineMail, AiOutlineSetting, AiOutlineLogout } from 'react-icons/ai' ;
-import Layout from '../components/LayoutDaisy.js'
+import Layout from '../components/Layout2.js'
 
 
 export default function App({ Component, pageProps }) {

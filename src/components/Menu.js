@@ -6,16 +6,16 @@ import styles from '../styles/Menu.module.css';
 import Link from 'next/link';
 import React from 'react'
 
-function MenuLink({children,menu,submenuOpen,setSubmenuOpen}) {
+function MenuLink({children,menu,onMenuItemClick,submenuOpen,setSubmenuOpen}) {
     if(menu.link) {
         if(menu.link.endsWith(".html"))
-            return <Link href={"/_/html/"+menu.link}>{children}</Link>
+            return <Link href={"/_/html/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
         else if(menu.link.endsWith(".md") || menu.link.endsWith(".mdx"))
-            return <Link href={"/_/mdx/"+menu.link}>{children}</Link>
+            return <Link href={"/_/mdx/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
         else if(menu.link.endsWith(".ipynb"))
-            return <Link href={"/_/ipynb/"+menu.link}>{children}</Link>
+            return <Link href={"/_/ipynb/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
         else
-            return <Link href={menu.link}>{children}</Link>
+            return <Link href={menu.link} onClick={onMenuItemClick}>{children}</Link>
 
     } else {
         if(menu.submenu) {
@@ -28,11 +28,16 @@ function MenuLink({children,menu,submenuOpen,setSubmenuOpen}) {
 
 export default function Menu(props) {
     const [submenuOpen,setSubmenuOpen] = useState(false)
+
+    const handleMenuItemClick = (event) => {
+        props.onMenuItemClick && props.onMenuItemClick(event);
+      };
+
     return (
-        <ul className={styles.menuitems}>
+        <ul className={'menuItems '+ styles.menuitems}>
         {props.menuItems.map((menu,index) => (
             <React.Fragment key={index}>
-            <MenuLink menu={menu} submenuOpen={submenuOpen} setSubmenuOpen={setSubmenuOpen}>
+            <MenuLink menu={menu} onMenuItemClick={handleMenuItemClick} submenuOpen={submenuOpen} setSubmenuOpen={setSubmenuOpen}>
             <li className={styles.menuitem+` ${menu.spacing?"mt-9":"mt-2"}`}>
                 <span className={styles.menuitemicon}>
                 { menu.icon ? menu.icon : <RiDashboardFill/> }
@@ -48,7 +53,7 @@ export default function Menu(props) {
             {menu.submenu && submenuOpen && props.open && (
                 <ul>
                     {menu.submenuItems.map((submenuItem,index2) => (
-                    <MenuLink key={`${index}.${index2}`} menu={submenuItem}>
+                    <MenuLink key={`${index}.${index2}`} menu={submenuItem} onMenuItemClick={handleMenuItemClick} >
                     <li className={styles.submenuitem+` ${menu.spacing?"mt-9":"mt-2"}`}>
                         {submenuItem.title}
                     </li>
