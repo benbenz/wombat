@@ -8,7 +8,7 @@ module.exports = {
       colors: {
         "dark-purple" : "#081A51" ,
         "light-white" : "rgba(255,255,255,0.18)" ,
-        "header-color" : "rgb(254 243 222)"
+        "header-color" : "rgb(254 248 232)"
       }
     },
   },

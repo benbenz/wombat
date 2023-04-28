@@ -29,10 +29,10 @@ export default function App({ Component, pageProps }) {
       ]
     } ,
     { title: "Analytics" , link: "/html/analytics" , icon: <AiOutlineBarChart/> },
-    { title: "Inbox" , icon: <AiOutlineMail/> },
-    { title: "Profile" , icon: <BsPerson/>, spacing: true },
-    { title: "Settings" , icon: <AiOutlineSetting/> },
-    { title: "Logout" , icon: <AiOutlineLogout/> },
+    // { title: "Inbox" , icon: <AiOutlineMail/> },
+    // { title: "Profile" , icon: <BsPerson/>, spacing: true },
+    // { title: "Settings" , icon: <AiOutlineSetting/> },
+    // { title: "Logout" , icon: <AiOutlineLogout/> },
 
   ]  
 
