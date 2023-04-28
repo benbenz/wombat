@@ -1,0 +1,26 @@
+/*
+there is an issue with DaisyUI navbar sub items
+when clicked, it doesnt trigger the event
+it seems to be caused by the default display:none setting
+that cancels the even as soon as the object is active >> loose focus?
+*/
+/*
+.menu > :where(li) > :where(ul) {
+    display: none;
+  }
+.menu > :where(li:hover) > :where(ul) {
+    display: flex;
+}
+.menu > :where(li:focus) > :where(ul) {
+    display: flex;
+}*/
+.menu > :where(li:active) > :where(ul) {
+    display: flex;
+}
+
+.menu > :where(li) > :where(ul) {
+    background-color: white;
+    border-width: 1px;
+    border-color: lightgrey;
+    border-top: none;
+}

@@ -37,7 +37,7 @@ const Layout = ({ children , title, menuItems }) => {
           <input className={styles.searchinput+` ${!open && "hidden"}` } type={"search"} placeholder="Search"/>
         </div>
 
-        <Menu open={open} menuItems={menuItems}/>
+        <Menu open={open} menuItems={menuItems} defaultCss={true}/>
 
         </div>{/* leftbar */}
     

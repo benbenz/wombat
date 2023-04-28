@@ -13,11 +13,11 @@ li p {
 
 /* Layout 2 */
 
-.open .leftbar {
-  @apply w-72 ;
+.container_v2.open .leftbar {
+  @apply w-72;
 }
-.closed .leftbar {
-  @apply w-20 ;
+.container_v2.closed .leftbar {
+  @apply w-20;
 }
 
 :root {
@@ -33,28 +33,28 @@ li p {
   :root {
     --is-mobile: 1;
   }
-  main {
+  .container_v2 main {
     @apply w-full absolute mt-[4em] z-10;
   }
-  .l2_container {
+  .container_v2 {
     @apply flex-col ;
   }
-  .menuarrow {
+  .container_v2 .menuarrow {
     @apply hidden ;
   }
-  .leftbar {
+  .container_v2 .leftbar {
     @apply fixed z-20;
   }
-  .open .leftbar {
+  .container_v2 .open .leftbar {
     @apply w-screen absolute ;
   }
-  .mainTitle {
+  .container_v2 .mainTitle {
     @apply scale-100 w-auto !important ;
   }
-  .closed .leftbar {
+  .container_v2.closed .leftbar {
     @apply w-screen min-h-0;
   }
-  .closed .leftbar .menuItems {
+  .container_v2.closed .leftbar .menuItems {
     @apply hidden !important ;
   }
 }
@@ -68,3 +68,35 @@ li p {
 @media only screen and (min-width: 768px) {
 
 } 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 991px) {
+  #mainContent {
+    @apply w-4/5;
+    margin: auto;
+  }
+} 
+
+
+.remark-highlight {
+  overflow-x: scroll;
+}
+
+.navcontainer {
+  @apply bg-header-color p-2 m-0;
+  border-bottom: 1px solid lightgrey ;  
+}
+.navbar {
+  min-height: unset;
+  @apply bg-transparent;
+}
+.menu > :where(li) > :where(ul) {
+  @apply bg-header-color !important;
+}
+.menu {
+  @apply bg-header-color !important;
+}
+
+.btn {
+  @apply text-dark-purple ;
+}

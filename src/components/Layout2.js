@@ -1,4 +1,4 @@
-import { useState } from 'react' ;
+import { useState , useEffect } from 'react' ;
 import Menu from '../components/Menu.js';
 import { BsArrowLeftShort , BsSearch , BsChevronDown } from 'react-icons/bs' 
 import { AiFillEnvironment, AiOutlineMenu} from 'react-icons/ai' ;
@@ -10,17 +10,29 @@ import MDXComponents from './MDXComponents.js';
 
 
 const Layout = ({ children , title, menuItems }) => {
-    const [open,setOpen] = useState(true)
 
-    const handleMenuItemClick = (event) => {
-      const isMobile = parseInt(getComputedStyle(event.target).getPropertyValue('--is-mobile'));
-      if (isMobile) {
-        setOpen(false)
-      }      
-    };
+  const [open,setOpen] = useState(true) ;
 
-    return (
-    <div className={"l2_container flex "+ (open?"open":"closed")}>
+  const checkMobile = (element) => {
+    return parseInt(getComputedStyle(element).getPropertyValue('--is-mobile'));      
+  }
+
+  /*
+  useEffect(() => {
+    if(checkMobile(document.documentElement))
+      setOpen(false)
+  });
+  */
+
+  const handleMenuItemClick = (event) => {
+    const isMobile = checkMobile(event.target) ;
+    if (isMobile) {
+      setOpen(false)
+    }      
+  };
+
+  return (
+    <div className={"container_v2 flex "+ (open?"open":"closed")}>
     
     <div className={"leftbar " + styles.leftbar} >
         <BsArrowLeftShort className={'menuarrow ' + styles.menuarrow + ` ${!open && "rotate-180"}`} onClick={()=>setOpen(!open)}/>
@@ -35,7 +47,7 @@ const Layout = ({ children , title, menuItems }) => {
         </div>
        */}
 
-        <Menu open={open} menuItems={menuItems} onMenuItemClick={handleMenuItemClick} />
+        <Menu open={open} menuItems={menuItems} onMenuItemClick={handleMenuItemClick} defaultCss={true}/>
 
       </div>{/* leftbar */}
     
@@ -50,7 +62,7 @@ const Layout = ({ children , title, menuItems }) => {
       </main>
     
     </div>
-    )
+  )
 } ;
 
 export default Layout ;

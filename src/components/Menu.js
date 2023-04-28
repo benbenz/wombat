@@ -34,7 +34,7 @@ export default function Menu(props) {
       };
 
     return (
-        <ul className={'menuItems '+ styles.menuitems}>
+        <ul className={'menuItems '+ styles.menuitems+(props.className?' ' + props.className : '')}>
         {props.menuItems.map((menu,index) => (
             <React.Fragment key={index}>
             <MenuLink menu={menu} onMenuItemClick={handleMenuItemClick} submenuOpen={submenuOpen} setSubmenuOpen={setSubmenuOpen}>
