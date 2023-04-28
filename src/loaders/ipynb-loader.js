@@ -135,8 +135,9 @@ module.exports = async function (source) {
     console.error(error)
   }
 
-  const jsx_string = `import prismCss from 'prismjs/themes/prism.css';
-${all_jsx}
-`
-  return jsx_string
+//   const jsx_string = `import prismCss from 'prismjs/themes/prism.css';
+// ${all_jsx}
+// `
+//   return jsx_string
+  return `${all_jsx}`
 };

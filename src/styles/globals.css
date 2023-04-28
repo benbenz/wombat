@@ -72,7 +72,7 @@ li p {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 991px) {
   #mainContent {
-    @apply w-4/5;
+    @apply w-3/4;
     margin: auto;
   }
 } 
@@ -100,3 +100,10 @@ li p {
 .btn {
   @apply text-dark-purple ;
 }
+
+code[class*="language-"],
+pre[class*="language-"] {
+    line-height: 1!important;
+    font-size: unset!important;
+}
+  

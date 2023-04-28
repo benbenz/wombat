@@ -1,15 +1,15 @@
-import '@/styles/globals.css'
 import '@/styles/ipynbStyle.css'
 import { BsFillImageFill, BsReverseLayoutTextSidebarReverse, BsPerson} from 'react-icons/bs' ;
 import { AiOutlineFileText, AiOutlineBarChart, AiOutlineMail, AiOutlineSetting, AiOutlineLogout } from 'react-icons/ai' ;
 import Layout from '../components/Layout3.js'
-
+import 'prismjs/themes/prism.css';
+import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }) {
   const menuItems = [
     { title: "Intro" , link: "intro.html"} ,
     { title: "Docs" , link: "/jsx/documents" , icon: <AiOutlineFileText/>} ,
-    { title: "Medias" , link: "/jsx/medias?reset=1" , icon: <BsFillImageFill/> , spacing: true } ,
+    { title: "Medias" , link: "/jsx/medias" , icon: <BsFillImageFill/> , spacing: true } ,
     {
       title: "Examples" ,
       icon : <BsReverseLayoutTextSidebarReverse/>,
