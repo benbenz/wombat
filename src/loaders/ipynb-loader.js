@@ -61,7 +61,7 @@ module.exports = async function (source) {
                       remarkDirective.default,
                       myRemarkPlugin, // adds classes and ids to DIVs etc.
                       remarkMath.default,
-                      //remarkPrism.default,
+                      remarkPrism.default,
                       remarkRehype.default,
                       remarkSpecials.default
                     ],
