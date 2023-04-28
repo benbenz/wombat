@@ -1,64 +1,86 @@
 // loaders/ipynb-loader.js
 // http://ipython.org/ipython-doc/3/notebook/nbformat.html
 
-const { Buffer } = require('node:buffer');
+const { Buffer }   = require('node:buffer');
 
 module.exports = async function (source) {
-  const { unified } = await import ('unified')
-  const remarkParse = await import('remark-parse')
-  const remarkGfm = await import('remark-gfm')
-  const remarkMath = await import ('remark-math')
-  const remarkRehype = await import ('remark-rehype')
-  const remarkPrism = await import ('remark-prism')
-  const remarkDirective = await import ('remark-directive')
-  const rehypeKatex = await import('rehype-katex')
-  const rehypeStringify = await import('rehype-stringify')
-  const rehypeReact = await import('rehype-react')
-  const remarkSpecials = await import('../plugins/remark-specials.mjs')
-  const {visit} = await import('unist-util-visit');
-  const {h} = await import('hastscript');
 
-  /*
-  This remark plugin adds the attributes (classes and ids)
-  To the elements added by remark-directive
-  */
+  const COMPILER_KEY = { key : '__ipynb_compiler__' } ;
 
-  function myRemarkPlugin() {
-    return (tree) => {
-      visit(tree, (node) => {
-        if (
-          node.type === 'textDirective' ||
-          node.type === 'leafDirective' ||
-          node.type === 'containerDirective'
-        ) {
-          const data = node.data || (node.data = {})
-          const hast = h(node.name, node.attributes)
+  const cache  = new WeakMap()
 
-          data.hName = hast.tagName
-          data.hProperties = hast.properties
-        }
-      }) ;
-      return tree
+  let compiler = cache.get(COMPILER_KEY) ;
+
+  if(!compiler) {
+
+    console.log("STARTED BUILDING COMPILER") ;
+
+    const { unified } = await import ('unified')
+    const remarkParse = await import('remark-parse')
+    const remarkGfm = await import('remark-gfm')
+    const remarkMath = await import ('remark-math')
+    const remarkRehype = await import ('remark-rehype')
+    const remarkPrism = await import ('remark-prism')
+    const remarkDirective = await import ('remark-directive')
+    const rehypeKatex = await import('rehype-katex')
+    const rehypeStringify = await import('rehype-stringify')
+    const rehypeReact = await import('rehype-react')
+    const remarkSpecials = await import('../plugins/remark-specials.mjs')
+    const {visit} = await import('unist-util-visit');
+    const {h} = await import('hastscript');
+
+    /*
+    This remark plugin adds the attributes (classes and ids)
+    To the elements added by remark-directive
+    */
+
+    function myRemarkPlugin() {
+      return (tree) => {
+        visit(tree, (node) => {
+          if (
+            node.type === 'textDirective' ||
+            node.type === 'leafDirective' ||
+            node.type === 'containerDirective'
+          ) {
+            const data = node.data || (node.data = {})
+            const hast = h(node.name, node.attributes)
+
+            data.hName = hast.tagName
+            data.hProperties = hast.properties
+          }
+        }) ;
+        return tree
+      }
     }
-  }
-  
-  // same chain
-  const {createProcessor} = await import('@mdx-js/mdx')
-  const proc_options = {
-    remarkPlugins: [remarkGfm.default,
-                    remarkDirective.default,
-                    myRemarkPlugin, // adds classes and ids to DIVs etc.
-                    remarkMath.default,
-                    remarkPrism.default,
-                    remarkRehype.default,
-                    remarkSpecials.default],
-    rehypePlugins: [rehypeKatex.default],
-    providerImportSource: "@mdx-js/react",
-    //outputFormat: 'function-body',
-    //useDynamicImport: true
-  }
+    
+    // same chain
+    const {createProcessor} = await import('@mdx-js/mdx')
+    const proc_options = {
+      remarkPlugins: [
+                      remarkGfm.default,
+                      remarkDirective.default,
+                      myRemarkPlugin, // adds classes and ids to DIVs etc.
+                      remarkMath.default,
+                      //remarkPrism.default,
+                      remarkRehype.default,
+                      remarkSpecials.default
+                    ],
+      rehypePlugins: [
+                      rehypeKatex.default
+                    ],
+      providerImportSource: "@mdx-js/react",
+      //outputFormat: 'function-body',
+      //useDynamicImport: true
+    }
 
-  const mdxproc = createProcessor(proc_options)
+    const mdxproc = createProcessor(proc_options)
+
+    compiler = mdxproc ;
+    cache.set(COMPILER_KEY,compiler)
+
+    console.log("ENDED BUILDING COMPILER") ;
+
+  }
 
   const nbJson = JSON.parse(source);
   let all_jsx = ""
@@ -89,7 +111,7 @@ module.exports = async function (source) {
                       _all_mdx += "\n:::div{.ipynb_ouput .ipynb_display_result}\n"+display_html+"\n:::\n"
                     }
                     else if(output.data['image/png']) {
-                      let img_html = `<img src="data:image/png;base64,${output.data['image/png']}"/>`
+                      //let img_html = `<img src="data:image/png;base64,${output.data['image/png']}"/>`
                       _all_mdx += "\n![image](data:image/png;base64,"+output.data['image/png']+")\n" ;
                     }
                 break
@@ -107,9 +129,7 @@ module.exports = async function (source) {
   }
 
   try {
-    const buf = Buffer.from(_all_mdx, 'utf8');
-    //console.log(_all_mdx)
-    all_jsx = String(await mdxproc.process(buf))
+    all_jsx = await compiler.process(_all_mdx)
   } catch(error) {
     console.error("\n\nERROR !!!!!!!!\n\n")
     console.error(error)
