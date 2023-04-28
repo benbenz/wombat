@@ -6,12 +6,14 @@ import remarkPrism from 'remark-prism'
 import remarkRehype from 'remark-rehype'
 import rehypeRaw from 'rehype-raw'
 import rehypeKatex from 'rehype-katex'
-import mdxProviderWrapper from './src/plugins/mdx-provider-wrapper.js'
+//import mdxProviderWrapper from './src/plugins/mdx-provider-wrapper.js'
 import remarkSpecials from './src/plugins/remark-specials.mjs'
 //import rehypeHighlight from 'rehype-highlight'
 import rehypeDocument from 'rehype-document'
 import _withMDX from '@next/mdx';
-import path from 'path'
+import path from 'path' 
+//import ipynb_loader from './src/loaders/ipynb-loader.mjs' ;
+import ipynb_conf from './src/loaders/ipynb-import.js'
 
 const withMDX = _withMDX({ //require('@next/mdx')({
   extension: /\.mdx?$/,
@@ -94,7 +96,10 @@ const nextConfig = {
       exclude: /node_modules/,
       use : [
         //{ loader: 'babel-loader' , options: { presets: ['next/babel','@babel/preset-react']}} ,
-        { loader: path.resolve('./src/loaders/ipynb-loader.js')}
+        //{ loader: path.resolve('./src/loaders/ipynb/index.cjs')}
+        //{ loader: require.resolve('./src/loaders/ipynb-loader.cjs') }
+        ipynb_conf
+        //require('./src/loaders/ipynb/index.cjs')
       ]
     })  
     return config
