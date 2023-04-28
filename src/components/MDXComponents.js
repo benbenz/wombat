@@ -24,7 +24,9 @@ const MDXComponents = {
   ),
   code: (props) => <code className="text-sm" {...props} />,
   table: (props) => (
-    <table className="min-w-full divide-y divide-gray-200 border-solid border" {...props} />
+    <div className="max-w-full block overflow-x-scroll">
+        <table className="divide-y divide-gray-200 border-solid border" {...props} />
+    </div>
   ),
   thead: (props) => <thead className="bg-gray-50" {...props} />,
   tbody: (props) => <tbody className="bg-white divide-y divide-gray-200" {...props} />,
