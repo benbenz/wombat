@@ -6,7 +6,8 @@ Order here is really important
 - some stuff override prism in global.css
 - Layout3.js imports DaisyMenuHack.module.css which also adds important overrides to globals >> tailwind/daisyui
 */
-import 'prismjs/themes/prism.css';
+//import 'prismjs/themes/prism.css';
+import 'highlight.js/styles/github.css';
 import '@/styles/globals.css'
 import Layout from '../components/Layout3.js'
 

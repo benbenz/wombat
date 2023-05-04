@@ -23,6 +23,7 @@ module.exports = async function (source) {
     const remarkPrism = await import ('remark-prism')
     const remarkDirective = await import ('remark-directive')
     const rehypeKatex = await import('rehype-katex')
+    const rehypeHighlight = await import('rehype-highlight')
     const rehypeStringify = await import('rehype-stringify')
     const rehypeReact = await import('rehype-react')
     const remarkSpecials = await import('../plugins/remark-specials.mjs')
@@ -57,15 +58,17 @@ module.exports = async function (source) {
     const {createProcessor} = await import('@mdx-js/mdx')
     const proc_options = {
       remarkPlugins: [
+                      remarkParse.default,
                       remarkGfm.default,
                       remarkDirective.default,
                       myRemarkPlugin, // adds classes and ids to DIVs etc.
                       remarkMath.default,
-                      remarkPrism.default,
+                      //remarkPrism.default,
                       remarkRehype.default,
                       remarkSpecials.default
                     ],
       rehypePlugins: [
+                      rehypeHighlight.default,
                       rehypeKatex.default
                     ],
       providerImportSource: "@mdx-js/react",
@@ -133,6 +136,7 @@ module.exports = async function (source) {
   } catch(error) {
     console.error("\n\nERROR !!!!!!!!\n\n")
     console.error(error)
+    console.error(_all_mdx)
   }
 
 //   const jsx_string = `import prismCss from 'prismjs/themes/prism.css';
