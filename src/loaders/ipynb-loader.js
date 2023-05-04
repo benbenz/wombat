@@ -113,7 +113,8 @@ module.exports = async function (source) {
                       let display_html = output.data['text/html'].join('\n') ;
                       _all_mdx += "\n:::div{.ipynb_ouput .ipynb_display_result}\n"+display_html+"\n:::\n"
                     }
-                    else if(output.data['image/png']) {
+                    
+                    if(output.data['image/png']) {
                       //let img_html = `<img src="data:image/png;base64,${output.data['image/png']}"/>`
                       _all_mdx += "\n![image](data:image/png;base64,"+output.data['image/png']+")\n" ;
                     }

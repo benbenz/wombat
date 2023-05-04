@@ -8,7 +8,7 @@ import rehypeRaw from 'rehype-raw'
 import rehypeKatex from 'rehype-katex'
 import mdxProviderWrapper from './src/plugins/mdx-provider-wrapper.js'
 import remarkSpecials from './src/plugins/remark-specials.mjs'
-//import rehypeHighlight from 'rehype-highlight'
+import rehypeHighlight from 'rehype-highlight'
 import rehypeDocument from 'rehype-document'
 import _withMDX from '@next/mdx';
 import path from 'path'
@@ -22,8 +22,8 @@ const withMDX = _withMDX({ //require('@next/mdx')({
 
     // !!! remarkPrism adds lots of compilation time
     
-    remarkPlugins: [remarkGfm,remarkMath,remarkPrism,remarkRehype,remarkSpecials],
-    rehypePlugins: [rehypeKatex],//,mdxProviderWrapper],//,rehypeHighlight],//,rehypeDocument],
+    remarkPlugins: [remarkGfm,remarkMath,/*remarkPrism,*/remarkRehype,remarkSpecials],
+    rehypePlugins: [rehypeHighlight,rehypeKatex],//,mdxProviderWrapper],//,rehypeHighlight],//,rehypeDocument],
     // If you use `MDXProvider`, uncomment the following line.
     providerImportSource: "@mdx-js/react"
   },
