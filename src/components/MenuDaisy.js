@@ -32,8 +32,11 @@ export default function Menu(props) {
         props.onMenuItemClick && props.onMenuItemClick(event);
       };
 
+    const thestring = props.orientation==="vertical" ? "menu menu-vertical px-1" : "menu menu-horizontal px-1";
+    console.log(thestring)
+
     const className  = props.forMobile ? "menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-min" :
-                                       `menu menu-${props.orientation} px-1` ;
+                                       thestring ;
     const aClassName = "" ;//props.forMobile ? "justify-between" : "" ;
     const submenuClassName = "p-2"
 
