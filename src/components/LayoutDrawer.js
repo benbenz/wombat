@@ -31,7 +31,12 @@ const Layout = ({ children , title, menuItems }) => {
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" onChange={handleChange} checked={open}/>
         <div className="drawer-content">
-          <label htmlFor="my-drawer" className="btn btn-primary drawer-button">Open drawer</label>
+          {/*<label htmlFor="my-drawer" className="btn btn-primary drawer-button">Open drawer</label>*/}
+          <div className="navbar bg-base-100">
+            <div className="navbar-start">
+              <AiOutlineMenu htmlFor="my-drawer" className="drawer-button btn btn-primary bg-header-color" className={styles.logo+ ` ${!open && "rotate-[360deg]"}`} onClick={()=>setOpen(!open)}/>
+            </div>
+          </div>
           <main id="mainContent" className={styles.main+" "}>
             <div className="p-7">
               <div>
