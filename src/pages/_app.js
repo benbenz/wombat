@@ -9,7 +9,7 @@ Order here is really important
 //import 'prismjs/themes/prism.css';
 import 'highlight.js/styles/github.css';
 import '@/styles/globals.css'
-import Layout from '../components/LayoutDrawer.js'
+import Layout from '../components/Layout3.js'
 
 export default function App({ Component, pageProps }) {
   const menuItems = [
