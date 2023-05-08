@@ -107,3 +107,13 @@ pre[class*="language-"] {
     font-size: unset!important;
 }
   
+
+@media only screen and (max-width: 991px) {
+  .menu-vertical > :where(li) > :where(ul) {
+      position: initial!important ;
+      border: none;
+  }
+  .menu-vertical > :where(li) {
+      outline: none;
+  }
+}

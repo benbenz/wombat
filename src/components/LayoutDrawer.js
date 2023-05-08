@@ -20,13 +20,19 @@ const Layout = ({ children , title, menuItems }) => {
       setOpen(event.target.checked)
     }
 
+    const handleMenuItemClick = (event) => {
+      event.target.blur();
+      document.getElementById('mainContent').focus();
+      setOpen(false)
+    };
+
     return (
 
       <div className="drawer">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" onChange={handleChange} checked={open}/>
         <div className="drawer-content">
           <label htmlFor="my-drawer" className="btn btn-primary drawer-button">Open drawer</label>
-          <main className={styles.main+" "}>
+          <main id="mainContent" className={styles.main+" "}>
             <div className="p-7">
               <div>
                   <MDXProvider components={MDXComponents}>
@@ -43,10 +49,10 @@ const Layout = ({ children , title, menuItems }) => {
             <AiOutlineMenu className={styles.logo+ ` ${!open && "rotate-[360deg]"}`} onClick={()=>setOpen(!open)}/>
             <Link href="/"><h1 className={styles.maintitle+ ` ${!open && "scale-0 width-0"}`}>{title}</h1></Link>
           */}
-          <Menu open={open}
+          <Menu className={"w-80"}
                 menuIndex={1}
                 menuItems={menuItems}
-                onMenuItemClick={null}
+                onMenuItemClick={handleMenuItemClick}
                 orientation="vertical"
                 forMobile={false}/>                
         </div>
