@@ -44,6 +44,7 @@ const Layout = ({ children , title, menuItems }) => {
                 menuIndex={1}
                 menuItems={menuItems}
                 onMenuItemClick={handleMenuItemClick}
+                orientation="horizontal"
                 forMobile={false}/>
         </div>
         <div className="navbar-end">

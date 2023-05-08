@@ -7,7 +7,7 @@ import { BsArrowLeftShort , BsSearch , BsChevronDown } from 'react-icons/bs'
 import { AiFillEnvironment, AiOutlineMenu } from 'react-icons/ai' ;
 import { MDXProvider } from '@mdx-js/react';
 import MDXComponents from './MDXComponents.js';
-import Menu from '../components/Menu.js';
+import Menu from './MenuDaisy.js';
 import Link from 'next/link';
 
 const Layout = ({ children , title, menuItems }) => {
@@ -39,29 +39,19 @@ const Layout = ({ children , title, menuItems }) => {
         {/*<div className={"drawer-side "+styles.leftbar+` ${open ? "w-72" : "w-20"}`}>*/}
         <div className={"drawer-side"}>
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <BsArrowLeftShort htmlFor="my-drawer" className={styles.menuarrow + ` ${!open && "rotate-180 hidden"}`} onClick={ ()=> setOpen(!open) }/>
-          <div className={styles.wrapper}>
+          {/*
             <AiOutlineMenu className={styles.logo+ ` ${!open && "rotate-[360deg]"}`} onClick={()=>setOpen(!open)}/>
             <Link href="/"><h1 className={styles.maintitle+ ` ${!open && "scale-0 width-0"}`}>{title}</h1></Link>
-          </div>
-          {/*
-          <div className={styles.searchitem+` ${!open?"px-2.5":"px-4"}`}>
-            <BsSearch className={styles.searchicon+ ` ${open && "mr-2"}`}/>
-            <input className={styles.searchinput+` ${!open && "hidden"}` } type={"search"} placeholder="Search"/>
-          </div>
           */}
-          <Menu open={open} menuItems={menuItems} className={`${!open && "scale-0 width-0 height-0 hidden"}`}/>
+          <Menu open={open}
+                menuIndex={1}
+                menuItems={menuItems}
+                onMenuItemClick={null}
+                orientation="vertical"
+                forMobile={false}/>                
         </div>
       </div>      
     )
-    {
-      /*
-      <div className="flex">
-        <div className={styles.leftbar+` ${open ? "w-72" : "w-20"}`} >
-        </div>
-      </div>
-    */
-    }
 } ;
 
 export default Layout ;
