@@ -59,7 +59,6 @@ export default function Menu(props) {
                 </MenuLink>
                 {menu.submenu && (
                 <ul className={submenuClassName}>
-                    {props.title &&(<Link href="/" className="text-center p-4" onClick={handleMenuItemClick}>{props.title}</Link>)}
                     {menu.submenuItems.map((submenuItem,index2) => (
                     <li key={`${props.menuIndex}.${index}.${index2}`} tabIndex={tabIndex++}>
                     <MenuLink menu={submenuItem} onMenuItemClick={handleMenuItemClick}>
