@@ -32,9 +32,12 @@ const Layout = ({ children , title, menuItems }) => {
         <input id="my-drawer" type="checkbox" className="drawer-toggle" onChange={handleChange} checked={open}/>
         <div className="drawer-content">
           {/*<label htmlFor="my-drawer" className="btn btn-primary drawer-button">Open drawer</label>*/}
-          <div className="navbar bg-base-100">
+          <div className={"navbar "+styles.navbar}>
             <div className="navbar-start">
-              <AiOutlineMenu htmlFor="my-drawer" className="drawer-button btn btn-primary bg-header-color" className={styles.logo+ ` ${!open && "rotate-[360deg]"}`} onClick={()=>setOpen(!open)}/>
+              <AiOutlineMenu htmlFor="my-drawer" className={styles.logo2+` ${!open && "rotate-[360deg]"}`} onClick={()=>setOpen(!open)}/>
+              <Link href="/" className="btn btn-ghost normal-case text-4xl">{title}</Link>
+            </div>
+            <div className="navbar-center">
             </div>
           </div>
           <main id="mainContent" className={styles.main+" "}>

@@ -1,13 +1,7 @@
-.ipynb_notebook div.ipynb_code {
-    font-size: 90%;
-    border: thin solid lightgrey;
-    border-collapse: collapse;
-    margin-bottom: 1em;
-    line-height: 0.9;
+div.ipynbcode pre code {
+    font-size: 0.92rem;
 }
-.ipynb_notebook div.ipynb_code pre {
-    padding: 1em;
-}
-.ipynb_notebook .ipynb_code p {
-    margin: .2em ;
+
+div.ipynbcode code[class*="language-"], div.ipynbcode pre[class*="language-"] {
+    line-height: 0.7rem;
 }

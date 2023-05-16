@@ -18,11 +18,11 @@ const MDXComponents = {
   ),
   pre: (props) => (
     <pre
-      className="bg-gray-100 p-4 rounded-lg overflow-auto my-4"
+      className="bg-white p-0 border border-grey rounded overflow-auto my-4"
       {...props}
     />
   ),
-  code: (props) => <code className="text-sm" {...props} />,
+  code: (props) => <code className="text-sm px-5" {...props} />,
   table: (props) => (
     <div className="max-w-full block overflow-x-scroll">
         <table className="divide-y divide-gray-200 border-solid border" {...props} />
