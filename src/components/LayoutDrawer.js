@@ -11,7 +11,7 @@ import Menu from './MenuDaisy.js';
 import Link from 'next/link';
 
 const Layout = ({ children , title, menuItems }) => {
-    const [open,setOpen] = useState(true)
+    const [open,setOpen] = useState(false)
     const router = useRouter();
     const checkbox = useRef();
 
@@ -62,7 +62,8 @@ const Layout = ({ children , title, menuItems }) => {
                 menuItems={menuItems}
                 onMenuItemClick={handleMenuItemClick}
                 orientation="vertical"
-                forMobile={false}/>                
+                forMobile={false}
+                title={title}/>                
         </div>
       </div>      
     )

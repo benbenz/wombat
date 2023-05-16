@@ -44,6 +44,7 @@ export default function Menu(props) {
 
     return (
         <ul className={styles.menu+' '+className}>
+            {props.title &&(<Link href="/" className="text-center p-4" onClick={handleMenuItemClick}>{props.title}</Link>)}
         {props.menuItems.map((menu,index) => (
             <li key={props.menuIndex+"."+index} tabIndex={tabIndex++}>
                 <MenuLink menu={menu} onMenuItemClick={handleMenuItemClick} className={menu.submenu && aClassName}>
@@ -58,6 +59,7 @@ export default function Menu(props) {
                 </MenuLink>
                 {menu.submenu && (
                 <ul className={submenuClassName}>
+                    {props.title &&(<Link href="/" className="text-center p-4" onClick={handleMenuItemClick}>{props.title}</Link>)}
                     {menu.submenuItems.map((submenuItem,index2) => (
                     <li key={`${props.menuIndex}.${index}.${index2}`} tabIndex={tabIndex++}>
                     <MenuLink menu={submenuItem} onMenuItemClick={handleMenuItemClick}>
