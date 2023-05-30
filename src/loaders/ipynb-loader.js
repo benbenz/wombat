@@ -2,6 +2,7 @@
 // http://ipython.org/ipython-doc/3/notebook/nbformat.html
 
 const { Buffer }   = require('node:buffer');
+const escape = require('escape-html'); 
 
 module.exports = async function (source) {
 
@@ -122,7 +123,7 @@ module.exports = async function (source) {
                     tabs_content[tab_index] = "\n![image](data:image/png;base64,"+output.data['image/png']+")\n" ;
                   }
                   if(output.data['text/plain']) {
-                    let display_text = output.data['text/plain'].join('\n') ;
+                    let display_text = escape(output.data['text/plain'].join('\n')) ;
                     tabs_content[tab_index] += "\n:::div{.ipynb_ouput .ipynb_display_result}\n"+display_text+"\n:::\n"
                   }
                   else if(output.data['text/html']) {
