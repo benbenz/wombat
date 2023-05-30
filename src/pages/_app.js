@@ -31,8 +31,7 @@ export default function App({ Component, pageProps }) {
         { title: "example3.md (thru)" , link: "/mdx/example3" } , 
         { title: "notebooks.ipynb (thru)" , link: "/ipynb/notebooks" } ,
         { title: "notebooks.ipynb (proxy)" , link: "notebooks.ipynb" } ,
-        { title: "ols.ipynb (thru)" , link: "/ipynb/ols" } ,
-        { title: "Other" , link: "/"}
+        { title: "ols.ipynb (thru)" , link: "/ipynb/ols" } 
       ]
     } ,
     { title: "Analytics" , link: "/html/analytics" , icon: <AiOutlineBarChart/> },
