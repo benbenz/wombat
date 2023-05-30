@@ -2,13 +2,13 @@
   @apply bg-dark-purple h-fit min-h-screen p-4 pt-6 relative duration-300 ;
 }
 .navbar {
-  @apply bg-header-color p-7 border-b;
+  @apply p-7 /*bg-base-200 border-b*/;
 }
 .logo {
   @apply bg-amber-300 text-2xl rounded cursor-pointer block float-left mr-2 duration-500 ;  
 }
 .logo2 {
-  @apply text-4xl rounded cursor-pointer block float-left mr-2 duration-500 ;  
+  @apply text-4xl rounded cursor-pointer block float-left duration-500 ;  
 }
 .maintitle {
   @apply whitespace-nowrap text-white origin-left font-medium text-2xl duration-300;

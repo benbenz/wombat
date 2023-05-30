@@ -43,7 +43,8 @@ export default function App({ Component, pageProps }) {
 
   ]  
 
-  const title = "Econ 2023" ;
+  const title = "Econ" ;
+  const title_extra = "2023"
 
-  return <Layout menuItems={menuItems} title={title}><Component {...pageProps} /></Layout>
+  return <Layout menuItems={menuItems} title={title} title_extra={title_extra}><Component {...pageProps} /></Layout>
 }

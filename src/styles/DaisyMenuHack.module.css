@@ -17,10 +17,18 @@ that cancels the even as soon as the object is active >> loose focus?
 .menu > :where(li:active) > :where(ul) {
     display: flex;
 }
-
+.menu > :where(li) {
+    outline: none;
+}
 .menu > :where(li) > :where(ul) {
+    /*
     background-color: white;
     border-width: 1px;
     border-color: lightgrey;
     border-top: none;
+    */
+    left: initial ;
+    display: flex;
+    position: initial;
+    outline: none;
 }

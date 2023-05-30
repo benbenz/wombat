@@ -1,24 +1,28 @@
 import { useState } from 'react' ;
+import { useRouter } from 'next/router' ;
 import { RiDashboardFill } from 'react-icons/ri' ;
 import Link from 'next/link';
 import React from 'react';
 import styles from '../styles/DaisyMenuHack.module.css';
 
-function MenuLink({children,menu,className,onMenuItemClick}) {
+function MenuLink({children,menu,className,onMenuItemClick,index,handleSubmenuToggle}) {
     className = className || "" ;
+    const router = useRouter() ;
     if(menu.link) {
+        let the_link = menu.link ;
         if(menu.link.endsWith(".html"))
-            return <Link href={"/_/html/"+menu.link} onClick={onMenuItemClick} className={className}>{children}</Link>
+            the_link = "/_/html/"+menu.link 
         else if(menu.link.endsWith(".md") || menu.link.endsWith(".mdx"))
-            return <Link href={"/_/mdx/"+menu.link} onClick={onMenuItemClick} className={className}>{children}</Link>
+            the_link = "/_/mdx/"+menu.link 
         else if(menu.link.endsWith(".ipynb"))
-            return <Link href={"/_/ipynb/"+menu.link} onClick={onMenuItemClick} className={className}>{children}</Link>
-        else
-            return <Link href={menu.link} onClick={onMenuItemClick} className={className}>{children}</Link>
+            the_link = "/_/ipynb/"+menu.link 
 
+        if(router.asPath==the_link)
+            className += ' active' ;
+        return <Link href={the_link} onClick={onMenuItemClick} className={className}>{children}</Link>
     } else {
         if(menu.submenu) {
-            return <a className={className}>{children}</a>
+            return <a className={className} onClick={() => handleSubmenuToggle(index)}>{children}</a>
         } else {
             return <a className={className}>{children}</a>
         }
@@ -31,6 +35,11 @@ export default function Menu(props) {
         //console.log(event)
         props.onMenuItemClick && props.onMenuItemClick(event);
       };
+
+    const [submenuOpen,setSubmenuOpen] = useState({}) // object
+    const handleSubmenuToggle = (index) => {
+        setSubmenuOpen({ ...submenuOpen, [index]: !submenuOpen[index] });
+    };      
 
     const thestring = props.orientation==="vertical" ? "menu menu-vertical px-1" : "menu menu-horizontal px-1";
 
@@ -47,7 +56,11 @@ export default function Menu(props) {
             {props.title &&(<Link href="/" className="text-center p-4" onClick={handleMenuItemClick}>{props.title}</Link>)}
         {props.menuItems.map((menu,index) => (
             <li key={props.menuIndex+"."+index} tabIndex={tabIndex++}>
-                <MenuLink menu={menu} onMenuItemClick={handleMenuItemClick} className={menu.submenu && aClassName}>
+                <MenuLink menu={menu}
+                          onMenuItemClick={handleMenuItemClick}
+                          index={index}
+                          handleSubmenuToggle={handleSubmenuToggle}
+                          className={menu.submenu && aClassName}>
                 { menu.icon ? menu.icon : <RiDashboardFill/> }
                 {menu.title}
                 {menu.submenu && props.forMobile && (
@@ -57,7 +70,7 @@ export default function Menu(props) {
                     <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/></svg>
                 )}
                 </MenuLink>
-                {menu.submenu && (
+                {menu.submenu && submenuOpen[index] && (
                 <ul className={submenuClassName}>
                     {menu.submenuItems.map((submenuItem,index2) => (
                     <li key={`${props.menuIndex}.${index}.${index2}`} tabIndex={tabIndex++}>

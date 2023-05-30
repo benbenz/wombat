@@ -34,7 +34,7 @@ li p {
     --is-mobile: 1;
   }
   .container_v2 main {
-    @apply w-full absolute mt-[4em] z-10;
+    /*@apply w-full absolute mt-[4em] z-10;*/
   }
   .container_v2 {
     @apply flex-col ;
@@ -83,7 +83,7 @@ li p {
 }
 
 .navcontainer {
-  @apply bg-header-color p-2 m-0;
+  @apply bg-base-200 p-2 m-0;
   border-bottom: 1px solid lightgrey ;  
 }
 .navbar {
@@ -91,10 +91,10 @@ li p {
   @apply bg-transparent;
 }
 .menu > :where(li) > :where(ul) {
-  @apply bg-header-color !important;
+  @apply bg-base-200 !important;
 }
 .menu {
-  @apply bg-header-color !important;
+  @apply bg-base-200 !important;
 }
 
 .btn {

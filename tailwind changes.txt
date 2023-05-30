@@ -1,0 +1,5 @@
+- theme
+- behavior of menu / drawer 
+- blur/opacity list ...
+- expand
+- petite tab: output / result 
