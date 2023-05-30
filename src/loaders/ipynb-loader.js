@@ -88,7 +88,9 @@ module.exports = async function (source) {
   const nbJson = JSON.parse(source);
   let all_jsx = ""
   let _all_mdx = "" 
-  const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspec.language : "python"
+  const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspec.language : "python" ;
+
+  _all_mdx += `import Tabs from '../../components/Tabs.js';\n` ;
 
   for(nbCell of nbJson.cells) { 
       switch(nbCell.cell_type) {
@@ -98,30 +100,53 @@ module.exports = async function (source) {
         case 'code':
           _all_mdx += "\n:::div{.ipynbcode}\n```"+language+"\n"+nbCell.source.join('\n')+"\n```\n:::\n"
           if(nbCell.outputs) {
+            let tabs_names   = []
+            let tabs_content = [] 
+            let tab_index    = 0 
+            let img_index    = 0 
+            let term_index   = 0 
             for(output of nbCell.outputs) {
               switch(output.output_type) {
                 case "stream":
-                    _all_mdx += "\n:::div{.ipynb_ouput .ipynb_text}\n```console\n"+output.text.join('\n')+"\n```\n:::\n"
+                  tabs_names[tab_index] = "Output #" + term_index 
+                  tabs_content[tab_index] = "\n:::div{.ipynb_ouput .ipynb_text}\n```console\n"+output.text.join('\n')+"\n```\n:::\n"
+                  term_index++ 
+                  tab_index++ 
                 break
                 case "display_data":
                 case "execute_result":
-                    if(output.data['text/plain']) {
-                      let display_text = output.data['text/plain'].join('\n') ;
-                      _all_mdx += "\n:::div{.ipynb_ouput .ipynb_display_result}\n```console\n"+display_text+"\n```\n:::\n"
-                    }
-                    else if(output.data['text/html']) {
-                      let display_html = output.data['text/html'].join('\n') ;
-                      _all_mdx += "\n:::div{.ipynb_ouput .ipynb_display_result}\n"+display_html+"\n:::\n"
-                    }
+                  if(output.data['image/png']) {
+                    //let img_html = `<img src="data:image/png;base64,${output.data['image/png']}"/>`
+                    tabs_names[tab_index] = "Image #" + img_index
+                    img_index++ ; 
+                    tabs_content[tab_index] = "\n![image](data:image/png;base64,"+output.data['image/png']+")\n" ;
+                  }
+                  if(output.data['text/plain']) {
+                    let display_text = output.data['text/plain'].join('\n') ;
+                    tabs_content[tab_index] += "\n:::div{.ipynb_ouput .ipynb_display_result}\n"+display_text+"\n:::\n"
+                  }
+                  else if(output.data['text/html']) {
+                    let display_html = output.data['text/html'].join('\n') ;
+                    tabs_content[tab_index] += "\n:::div{.ipynb_ouput .ipynb_display_result}\n"+display_html+"\n:::\n"
+                  }
+
+                  tab_index++ ;
                     
-                    if(output.data['image/png']) {
-                      //let img_html = `<img src="data:image/png;base64,${output.data['image/png']}"/>`
-                      _all_mdx += "\n![image](data:image/png;base64,"+output.data['image/png']+")\n" ;
-                    }
                 break
                 case "raw":
 
                 break
+              }
+              if(tabs_names.length>1) {
+                _all_mdx += "\n<Tabs>\n"
+                for(let i=0 ; i<tabs_names.length ; i++) {
+                  _all_mdx += "<div label=\"" +tabs_names[i]+"\">\n" ;
+                  _all_mdx += tabs_content[i] ;
+                  _all_mdx += "</div>\n" ;
+                }
+                _all_mdx += "\n</Tabs>\n"
+              } else if(tabs_content.length==1) {
+                _all_mdx += tabs_content[0] ;                
               }
             }
           }
@@ -131,6 +156,8 @@ module.exports = async function (source) {
         break
       }
   }
+
+  console.log(_all_mdx) ;
 
   try {
     all_jsx = await compiler.process(_all_mdx)

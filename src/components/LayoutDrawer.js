@@ -45,9 +45,9 @@ const Layout = ({ children , title, title_extra, menuItems }) => {
                 </label>
                 {/*<Link href="/" className="btn btn-ghost normal-case text-4xl">{title}</Link>*/}
                 <Link href="/" aria-current="page" aria-label="Homepage" className="flex-0 btn btn-ghost px-2">
-                  <div class="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
-                    <span class="lowercase">{title}</span>
-                    {title_extra &&(<span class="text-base-content uppercase">{title_extra}</span>)}
+                  <div className="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
+                    <span className="lowercase">{title}</span>
+                    {title_extra &&(<span className="text-base-content uppercase">{title_extra}</span>)}
                   </div>
                 </Link>
               </div>
@@ -74,21 +74,21 @@ const Layout = ({ children , title, title_extra, menuItems }) => {
         {/*<div className={"drawer-side "+styles.leftbar+` ${open ? "w-72" : "w-20"}`}>*/}
         <div className="drawer-side scroll-smooth scroll-pt-5rem">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <aside class="bg-base-200 w-80">
-            <div class="z-20 bg-base-200 bg-opacity-90 backdrop-blur sticky top-0 items-center gap-2 px-4 py-2 hidden lg:flex shadow-sm">
+          <aside className="bg-base-200 w-80">
+            <div className="z-20 bg-base-200 bg-opacity-90 backdrop-blur sticky top-0 items-center gap-2 px-4 py-2 hidden lg:flex shadow-sm">
               <Link href="/" aria-current="page" aria-label="Homepage" className="flex-0 btn btn-ghost px-2">
-                <div class="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
-                  <span class="lowercase">{title}</span>
-                  {title_extra &&(<span class="text-base-content uppercase">{title_extra}</span>)}
+                <div className="font-title text-primary inline-flex text-lg transition-all duration-200 md:text-3xl">
+                  <span className="lowercase">{title}</span>
+                  {title_extra &&(<span className="text-base-content uppercase">{title_extra}</span>)}
                 </div>
               </Link>
               {/*
-              <a href="/docs/changelog" class="link link-hover font-mono text-xs text-opacity-50">
-                <div data-tip="Changelog" class="tooltip tooltip-bottom">2.52.0</div>
+              <a href="/docs/changelog" className="link link-hover font-mono text-xs text-opacity-50">
+                <div data-tip="Changelog" className="tooltip tooltip-bottom">2.52.0</div>
               </a>
               */}
             </div>
-            <div class="h-4"></div>
+            <div className="h-4"></div>
             <Menu className={"menu menu-compact flex flex-col p-0 px-4"}
                   menuIndex={1}
                   menuItems={menuItems}
@@ -96,7 +96,7 @@ const Layout = ({ children , title, title_extra, menuItems }) => {
                   orientation="vertical"
                   forMobile={false}
                   title={false}/>       
-            <div class="from-base-200 pointer-events-none sticky bottom-0 flex h-20 bg-gradient-to-t to-transparent"></div>
+            <div className="from-base-200 pointer-events-none sticky bottom-0 flex h-20 bg-gradient-to-t to-transparent"></div>
           </aside>
         </div>
       </div>      
