@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Tab = ({ children, activeTab, label, onClick }) => {
-  let className = "tab";
+  let className = "tab tab-bordered";
 
   if (activeTab === label) {
     className += " tab-active";
@@ -27,8 +27,10 @@ const Tabs = ({ children }) => {
     setActiveTab(tab);
   };
 
+  const sizeClass = "size" + children.length ;
+
   return (
-    <div className="tabs">
+    <div className={"tabs "+sizeClass}>
       {children.map( (child) => {
         return (
           <Tab
@@ -41,11 +43,13 @@ const Tabs = ({ children }) => {
           </Tab>
         );
       })}
-      <div className="tab-content">
-        {children.map((child) => {
-          if (child.props.label !== activeTab) return undefined;
-          return child.props.children;
-        })}
+      <div className="w-full">
+        <div className="tab-content">
+          {children.map((child) => {
+            if (child.props.label !== activeTab) return undefined;
+            return child.props.children;
+          })}
+        </div>
       </div>
     </div>
   );

@@ -99,7 +99,7 @@ module.exports = async function (source) {
           _all_mdx += nbCell.source.join('\n')
         break
         case 'code':
-          _all_mdx += "\n:::div{.ipynbcode}\n```"+language+"\n"+nbCell.source.join('\n')+"\n```\n:::\n"
+          _all_mdx += "\n:::div{.ipynb-code}\n```"+language+"\n"+nbCell.source.join('\n')+"\n```\n:::\n"
           if(nbCell.outputs) {
             let tabs_names   = []
             let tabs_content = [] 
@@ -110,7 +110,7 @@ module.exports = async function (source) {
               switch(output.output_type) {
                 case "stream":
                   tabs_names[tab_index] = "Output #" + term_index 
-                  tabs_content[tab_index] = "\n:::div{.ipynb_ouput .ipynb_text}\n```console\n"+output.text.join('\n')+"\n```\n:::\n"
+                  tabs_content[tab_index] = "\n:::div{.ipynb-output .ipynb-text}\n```console\n"+output.text.join('\n')+"\n```\n:::\n"
                   term_index++ 
                   tab_index++ 
                 break
@@ -122,13 +122,14 @@ module.exports = async function (source) {
                     img_index++ ; 
                     tabs_content[tab_index] = "\n![image](data:image/png;base64,"+output.data['image/png']+")\n" ;
                   }
-                  if(output.data['text/plain']) {
-                    let display_text = escape(output.data['text/plain'].join('\n')) ;
-                    tabs_content[tab_index] += "\n:::div{.ipynb_ouput .ipynb_display_result}\n"+display_text+"\n:::\n"
-                  }
                   else if(output.data['text/html']) {
                     let display_html = output.data['text/html'].join('\n') ;
-                    tabs_content[tab_index] += "\n:::div{.ipynb_ouput .ipynb_display_result}\n"+display_html+"\n:::\n"
+                    tabs_content[tab_index] = "\n:::div{.ipynb-output .ipynb-display-result}\n"+display_html+"\n:::\n"
+                  }
+
+                  if(output.data['text/plain']) {
+                    let display_text = escape(output.data['text/plain'].join('\n')) ;
+                    tabs_content[tab_index] += "\n:::div{.ipynb-output .ipynb-display-label}\n"+display_text+"\n:::\n"
                   }
 
                   tab_index++ ;
@@ -138,18 +139,14 @@ module.exports = async function (source) {
 
                 break
               }
-              if(tabs_names.length>1) {
-                _all_mdx += "\n<Tabs>\n"
-                for(let i=0 ; i<tabs_names.length ; i++) {
-                  _all_mdx += "<div label=\"" +tabs_names[i]+"\">\n" ;
-                  _all_mdx += tabs_content[i] ;
-                  _all_mdx += "</div>\n" ;
-                }
-                _all_mdx += "\n</Tabs>\n"
-              } else if(tabs_content.length==1) {
-                _all_mdx += tabs_content[0] ;                
-              }
             }
+            _all_mdx += "\n<Tabs>\n"
+            for(let i=0 ; i<tabs_names.length ; i++) {
+              _all_mdx += "<div label=\"" +tabs_names[i]+"\">\n" ;
+              _all_mdx += tabs_content[i] ;
+              _all_mdx += "</div>\n" ;
+            }
+            _all_mdx += "\n</Tabs>\n"
           }
         break
         case 'raw':

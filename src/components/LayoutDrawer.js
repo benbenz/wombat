@@ -57,7 +57,7 @@ const Layout = ({ children , title, title_extra, menuItems }) => {
           </div>
           <div className="px-6 xl:pr-2 pb-16">
             <div className="flex flex-col-reverse justify-between gap-6 xl:flex-row">
-              <div className="prose w-full max-w-4xl flex-grow">
+              <div className="prose w-full max-w-8xl flex-grow">
                 <main id="mainContent" className={styles.main+" "}>
                   <div className="p-7">
                     <div>

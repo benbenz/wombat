@@ -1,7 +1,29 @@
-div.ipynbcode pre code {
+div.ipynb-code pre code {
     font-size: 0.92rem;
 }
 
-div.ipynbcode code[class*="language-"], div.ipynbcode pre[class*="language-"] {
+div.ipynb-code code[class*="language-"], div.ipynb-code pre[class*="language-"] {
     line-height: 0.7rem;
+}
+
+div.ipynb-code pre code , div.ipynb-output pre code {
+    padding: 1rem;
+    @apply text-base ;
+}
+
+div.tabs {
+   width: 100%; 
+}
+div.tabs.size1 .tab {
+    display: none
+}
+div.tab-content {
+    width: max-content;
+}
+
+div.tab-content .ipynb-display-label {
+    text-align: center;
+}
+div.tab-content .ipynb-display-label p {
+    font-size: 80%;
 }
