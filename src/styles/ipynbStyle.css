@@ -19,6 +19,7 @@ div.tabs.size1 .tab {
 }
 div.tab-content {
     width: max-content;
+    display: grid;
 }
 
 div.tab-content .ipynb-display-label {
@@ -26,4 +27,14 @@ div.tab-content .ipynb-display-label {
 }
 div.tab-content .ipynb-display-label p {
     font-size: 80%;
+}
+
+div.tab-display {
+    position: relative ;
+    grid-area: 1 / 1;
+    visibility: hidden;
+}
+
+div.tab-display.active {
+    visibility: visible;
 }

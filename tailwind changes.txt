@@ -3,3 +3,7 @@
 - blur/opacity list ...
 - expand
 - petite tab: output / result 
+
+- checker window resize 
+- CSS dynamique 
+- json de config + files pages

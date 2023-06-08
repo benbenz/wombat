@@ -91,7 +91,8 @@ module.exports = async function (source) {
   let _all_mdx = "" 
   const language = nbJson.metadata.kernelspec.language ? nbJson.metadata.kernelspec.language : "python" ;
 
-  _all_mdx += `import Tabs from '../../components/Tabs.js';\n` ;
+  //_all_mdx += `import Tabs from '../../components/Tabs.js';\n` ;
+  _all_mdx += `import Tabs from '../../components/TabsJS.js';\n` ;
 
   for(nbCell of nbJson.cells) { 
       switch(nbCell.cell_type) {
