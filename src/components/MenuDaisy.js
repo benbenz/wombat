@@ -11,11 +11,11 @@ function MenuLink({children,menu,className,onMenuItemClick,index,handleSubmenuTo
     if(menu.link) {
         let the_link = menu.link ;
         if(menu.link.endsWith(".html"))
-            the_link = "/_/html/"+menu.link 
+            the_link = "/_/"+menu.link 
         else if(menu.link.endsWith(".md") || menu.link.endsWith(".mdx"))
-            the_link = "/_/mdx/"+menu.link 
+            the_link = "/_/"+menu.link 
         else if(menu.link.endsWith(".ipynb"))
-            the_link = "/_/ipynb/"+menu.link 
+            the_link = "/_/"+menu.link 
 
         if(router.asPath==the_link)
             className += ' active' ;

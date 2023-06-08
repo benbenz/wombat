@@ -34,3 +34,6 @@ yarn-error.log*
 /package-lock.json
 
 site.js
+/site
+/src/pages/content/
+/src/pages/index.js

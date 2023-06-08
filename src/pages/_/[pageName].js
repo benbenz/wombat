@@ -1,17 +1,13 @@
-
-// pages/page/[pageName].js
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
 
 const MyComponent = ({ pageName }) => {
   const [Component, setComponent] = useState(null);
   useEffect(() => {
-    if (!pageName) return;
+    if(!pageName) return;
     const loadComponent = async () => {
-      const NoteBook = await import(`../../ipynb/${pageName}`);
-      //console.log(NoteBook)
-      setComponent(() => NoteBook.default);
+      const PageModule = await import(`../content/${pageName}`);
+      setComponent(() => PageModule.default);
     };
     loadComponent();
   }, [pageName]);
@@ -19,15 +15,7 @@ const MyComponent = ({ pageName }) => {
   if (!Component) {
     return <div>Loading...</div>;
   }
-  return (
-    <>
-     <Head>
-    </Head>
-    <div>
-      <Component />
-    </div>
-    </>
-  );
+  return <Component/>
 };
 
 const Page = () => {

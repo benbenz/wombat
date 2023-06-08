@@ -9,11 +9,11 @@ import React from 'react'
 function MenuLink({children,menu,onMenuItemClick,submenuOpen,setSubmenuOpen}) {
     if(menu.link) {
         if(menu.link.endsWith(".html"))
-            return <Link href={"/_/html/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
+            return <Link href={"/_/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
         else if(menu.link.endsWith(".md") || menu.link.endsWith(".mdx"))
-            return <Link href={"/_/mdx/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
+            return <Link href={"/_/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
         else if(menu.link.endsWith(".ipynb"))
-            return <Link href={"/_/ipynb/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
+            return <Link href={"/_/"+menu.link} onClick={onMenuItemClick}>{children}</Link>
         else
             return <Link href={menu.link} onClick={onMenuItemClick}>{children}</Link>
 

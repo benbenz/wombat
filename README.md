@@ -5,6 +5,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
+# make some content / use the example
+cp site.example.js site.js
+cp src/pages/index.example.js src/pages/index.js
+cp src/pages/content.example src/pages/content
+# run the server
 npm run dev
 # or
 yarn dev
