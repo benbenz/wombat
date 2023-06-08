@@ -4,6 +4,6 @@
 - expand
 - petite tab: output / result 
 
-- checker window resize 
-- CSS dynamique 
-- json de config + files pages
+x checker window resize 
+x CSS dynamique 
+x json de config + files pages
