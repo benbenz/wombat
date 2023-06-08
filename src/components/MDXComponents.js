@@ -6,10 +6,10 @@ const MDXComponents = {
   h3: (props) => <h3 className="text-2xl font-bold my-4" {...props} />,
   h4: (props) => <h4 className="text-xl font-bold my-4" {...props} />,
   h5: (props) => <h4 className="text-lg font-bold my-4" {...props} />,
-  p: (props) => <p className="text-base" {...props} />,
+  p: (props) => <p className="text-left" {...props} />,
   ul: (props) => <ul className="list-disc list-inside my-4 pl-4 leading-tight" {...props} />,
   ol: (props) => <ol className="list-decimal list-inside my-4 pl-4 leading-tight" {...props} />,
-  li: (props) => <li className="my-2 leading-tight" {...props} />,
+  li: (props) => <li className="my-1 leading-tight" {...props} />,
   a: (props) => (
     <a
       className="text-blue-600 hover:text-blue-800 transition duration-150"
@@ -22,7 +22,7 @@ const MDXComponents = {
       {...props}
     />
   ),
-  code: (props) => <code className="text-sm px-5" {...props} />,
+  code: (props) => <code className="font-mono px-0" {...props} />,
   table: (props) => (
     <div className="max-w-full block overflow-x-scroll">
         <table className="divide-y divide-gray-200 border-solid border" {...props} />

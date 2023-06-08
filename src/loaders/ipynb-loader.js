@@ -98,6 +98,7 @@ module.exports = async function (source) {
       switch(nbCell.cell_type) {
         case 'markdown' :
           _all_mdx += nbCell.source.join('\n')
+          _all_mdx += '\n' 
         break
         case 'code':
           _all_mdx += "\n:::div{.ipynb-code}\n```"+language+"\n"+nbCell.source.join('\n')+"\n```\n:::\n"
@@ -148,6 +149,7 @@ module.exports = async function (source) {
               _all_mdx += "</div>\n" ;
             }
             _all_mdx += "\n</Tabs>\n"
+            _all_mdx += '\n' 
           }
         break
         case 'raw':

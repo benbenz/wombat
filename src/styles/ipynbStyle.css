@@ -1,14 +1,10 @@
-div.ipynb-code pre code {
-    font-size: 0.92rem;
-}
 
 div.ipynb-code code[class*="language-"], div.ipynb-code pre[class*="language-"] {
-    line-height: 0.7rem;
 }
-
+div.ipynb-code pre {
+}
 div.ipynb-code pre code , div.ipynb-output pre code {
-    padding: 1rem;
-    @apply text-base ;
+    @apply p-2 ;
 }
 
 div.tabs {
@@ -26,13 +22,14 @@ div.tab-content .ipynb-display-label {
     text-align: center;
 }
 div.tab-content .ipynb-display-label p {
-    font-size: 80%;
+    @apply text-sm text-primary text-center; 
 }
 
 div.tab-display {
     position: relative ;
     grid-area: 1 / 1;
     visibility: hidden;
+    width: max-content ;
 }
 
 div.tab-display.active {

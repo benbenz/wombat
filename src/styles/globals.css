@@ -72,10 +72,13 @@ li p {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 991px) {
   #mainContent {
-    @apply w-full;
+    @apply w-full max-w-6xl mx-auto;
   }
 } 
 
+#mainContent {
+  @apply text-sm;
+}
 
 .remark-highlight {
   overflow-x: scroll;
@@ -103,7 +106,7 @@ li p {
 code[class*="language-"],
 pre[class*="language-"] {
     line-height: 1!important;
-    font-size: unset!important;
+    /*font-size: unset!important;*/
 }
   
 
