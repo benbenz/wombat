@@ -13,6 +13,7 @@ import SiteConfigDefault from '/site.js' ;
 import path from 'path' ;
 import App from 'next/app' ;
 
+
 export default function MyApp({ Component, pageProps }) {
 
   return <Layout  menuItems={SiteConfigDefault.menuItems}
@@ -34,7 +35,7 @@ class MyApp extends App {
     // load the settings
     let SiteConfigDyn = null ;
     if(dynamicPath)
-      SiteConfigDyn = await import(dynamicPath) ;
+      SiteConfigDyn = await import(__dirname+'/../../') ;
 
     // Pass SiteConfig to the page
     if(SiteConfigDyn)
