@@ -10,13 +10,11 @@ function MenuLink({children,menu,className,onMenuItemClick,index,handleSubmenuTo
     const router = useRouter() ;
     if(menu.link) {
         let the_link = menu.link ;
-        if(menu.link.endsWith(".html"))
-            the_link = "/_/"+menu.link 
-        else if(menu.link.endsWith(".md") || menu.link.endsWith(".mdx"))
-            the_link = "/_/"+menu.link 
-        else if(menu.link.endsWith(".ipynb"))
-            the_link = "/_/"+menu.link 
-
+        for(let ext of [ 'mdx', 'md', 'html' , 
+                        'ipynb' , 'c' , 'cpp' , 'h' , 'hpp' , 'py' , 'jl' , 'js', 'pl' , 'r' , 'php']) {
+            if(menu.link.endsWith('.'+ext))
+                the_link = "/_/"+menu.link ;
+        }
         if(router.asPath==the_link)
             className += ' active' ;
         return <Link href={the_link} onClick={onMenuItemClick} className={className}>{children}</Link>

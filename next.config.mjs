@@ -50,7 +50,8 @@ const withCustomLoader = (nextConfig = {}) => {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts', 'html' , 'ipynb' , 'c' , 'cpp' , 'h' , 'hpp' , 'py' , 'jl' , 'js'] ,
+  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts', 'html' , 
+        'ipynb' , 'c' , 'cpp' , 'h' , 'hpp' , 'py' , 'jl' , 'pl' , 'r' , 'php' ] ,
   
   webpack: (config, { isServer }) => {
     // config.module.rules.push({
@@ -97,7 +98,7 @@ const nextConfig = {
       ]
     })  
     config.module.rules.push({
-      test: /\.cpp$/ ,
+      test: /\.(cpp|c|h|hpp|jl|pl|py|r|php)$/ ,
       exclude: /node_modules/,
       use : [
         { loader: path.resolve('./src/loaders/allcode-loader.js')}

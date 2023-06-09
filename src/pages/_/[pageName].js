@@ -5,6 +5,7 @@ const MyComponent = ({ pageName }) => {
   const [Component, setComponent] = useState(null);
   useEffect(() => {
     if(!pageName) return;
+    console.log("PAGE NAME ="+pageName) ;
     const loadComponent = async () => {
       const PageModule = await import(`../content/${pageName}`);
       setComponent(() => PageModule.default);
