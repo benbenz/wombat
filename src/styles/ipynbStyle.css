@@ -4,7 +4,7 @@ div.ipynb-code code[class*="language-"], div.ipynb-code pre[class*="language-"] 
 div.ipynb-code pre {
 }
 div.ipynb-code pre code , div.ipynb-output pre code {
-    @apply p-2 ;
+    @apply p-2 leading-none;
 }
 
 div.tabs {

@@ -50,8 +50,8 @@ const withCustomLoader = (nextConfig = {}) => {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts', 'html' , 'ipynb'],
-
+  pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts', 'html' , 'ipynb' , 'c' , 'cpp' , 'h' , 'hpp' , 'py' , 'jl' , 'js'] ,
+  
   webpack: (config, { isServer }) => {
     // config.module.rules.push({
     //   test: /\.mdx?$/,
@@ -93,10 +93,16 @@ const nextConfig = {
       test: /\.ipynb$/,
       exclude: /node_modules/,
       use : [
-        //{ loader: 'babel-loader' , options: { presets: ['next/babel','@babel/preset-react']}} ,
         { loader: path.resolve('./src/loaders/ipynb-loader.js')}
       ]
     })  
+    config.module.rules.push({
+      test: /\.cpp$/ ,
+      exclude: /node_modules/,
+      use : [
+        { loader: path.resolve('./src/loaders/allcode-loader.js')}
+      ]
+    })      
     return config
   }
 }
