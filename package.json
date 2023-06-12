@@ -12,7 +12,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "wombat:example": "node wombat.js example",
+    "wombat:install": "node wombat.js install"
   },
   "dependencies": {
     "@babel/core": "^7.21.4",
