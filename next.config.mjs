@@ -12,6 +12,7 @@ import rehypeHighlight from 'rehype-highlight'
 import rehypeDocument from 'rehype-document'
 import _withMDX from '@next/mdx';
 import path from 'path'
+import fs from 'fs';
 
 const withMDX = _withMDX({ //require('@next/mdx')({
   extension: /\.mdx?$/,
@@ -103,7 +104,30 @@ const nextConfig = {
       use : [
         { loader: path.resolve('./src/loaders/allcode-loader.js')}
       ]
-    })      
+    })    
+
+    let wombat_dir = null ;
+    try {
+      wombat_dir = fs.readFileSync('.wombat',{ encoding: 'utf8', flag: 'r' });
+    } catch(err) {
+    }
+    if (wombat_dir) {
+      console.log("Adding",wombat_dir,"to webpack") ;
+      if(!config.resolve) {
+        config.resolve = {};
+      }  
+      // Disable symlink resolution for webpack 
+      config.resolve.symlinks = false ;
+      const jsRule = config.module.rules.find(
+        (rule) => rule.test && rule.test.toString().includes('.jsx')
+      );
+
+      // Now you can modify the rule. For instance, to include another directory:
+      if (jsRule) {
+          jsRule.include.push(wombat_dir);
+      }
+    }
+
     return config
   }
 }

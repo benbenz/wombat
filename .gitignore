@@ -36,3 +36,4 @@ yarn-error.log*
 /site.js
 /src/pages/content
 /src/pages/index.js
+.wombat
