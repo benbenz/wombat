@@ -9,6 +9,8 @@ First, run the development server:
 cp site.example.js site.js
 cp src/pages/index.example.js src/pages/index.js
 cp src/pages/content.example src/pages/content
+# install the example
+npm run wombat:example
 # run the server
 npm run dev
 # or

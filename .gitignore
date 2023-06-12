@@ -33,6 +33,6 @@ yarn-error.log*
 
 /package-lock.json
 
-# site.js
-# /src/pages/content/
-# /src/pages/index.js
+/site.js
+/src/pages/content
+/src/pages/index.js
