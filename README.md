@@ -6,11 +6,9 @@ First, run the development server:
 
 ```bash
 # make some content / use the example
-cp site.example.js site.js
-cp src/pages/index.example.js src/pages/index.js
-cp src/pages/content.example src/pages/content
-# install the example
 npm run wombat:example
+# or
+npm run wombat:install CONTENT_DIR
 # run the server
 npm run dev
 # or
@@ -18,6 +16,11 @@ yarn dev
 # or
 pnpm dev
 ```
+
+The CONTENT_DIR must have the following structure:
+- site.js : the site information (cf. example/site.js)
+- index.js : the home page (jsx)
+- content : the directory containing your pages, md(x), ipynb, etc.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
