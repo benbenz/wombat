@@ -1,13 +1,16 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+Wombat is a NextJS template that helps quickly write academic website for data sciences etc.
+It allows to directly render MarkDown, Jupyter Notebooks, Python code, C++ code, Julia code, etc.
+
 ## Getting Started
 
 First, run the development server:
 
 ```bash
-# make some content / use the example
+# use/install the example
 npm run wombat:example
-# or
+# or: install another directory
 npm run wombat:install CONTENT_DIR
 # run the server
 npm run dev
@@ -18,9 +21,9 @@ pnpm dev
 ```
 
 The CONTENT_DIR must have the following structure:
-- site.js : the site information (cf. example/site.js)
-- index.js : the home page (jsx)
-- content : the directory containing your pages, md(x), ipynb, etc.
+- site.js : the site information (cf. ./example/site.js)
+- index.js : the home page (cf. ./example/index.js)
+- content/ : the directory containing your pages, md(x), ipynb, etc. (cd. ./example/content directory)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
