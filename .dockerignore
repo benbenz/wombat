@@ -1,0 +1,8 @@
+.vscode
+node_modules
+Dockerfile
+notes.txt
+example
+src/pages/content
+site.js
+src/pages/index.js
