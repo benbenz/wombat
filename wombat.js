@@ -26,6 +26,6 @@ function install(directory) {
 }
 
 if(process.argv[2]==="example")
-    install('./example',true) ;
+    install('./example') ;
 else if(process.argv[2]==="install") 
     install(process.argv[3]) ;
