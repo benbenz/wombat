@@ -35,6 +35,21 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Running with docker
+
+Create a `site.js` `index.js` and a content folder and then run 
+
+```
+docker run \
+  -p 3000:3000 \
+  -it --rm \
+  --name wombat \
+  -v "$(pwd)":/usr/src/app/example \
+  wombat
+```
+
+you can edit the files and see the live updates.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
