@@ -37,3 +37,4 @@ yarn-error.log*
 /src/pages/content
 /src/pages/index.js
 .wombat
+commits_raw*.log
