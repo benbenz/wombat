@@ -9,7 +9,7 @@ Order here is really important
 import 'highlight.js/styles/atom-one-light.css';
 import '@/styles/globals.css'
 import Layout from '../components/LayoutDrawer.js'
-import SiteConfigDefault from '/site.js' ;
+import SiteConfigDefault from '/site.json' ;
 import path from 'path' ;
 import App from 'next/app' ;
 

@@ -1,9 +1,37 @@
 import { useState } from 'react' ;
 import { useRouter } from 'next/router' ;
-import { RiDashboardFill } from 'react-icons/ri' ;
+//import { RiDashboardFill } from 'react-icons/ri' ;
+import * as RiIcons from 'react-icons/ri' ;
+import * as BsIcons from 'react-icons/bs' ;
+import * as AiIcons from 'react-icons/ai' ; 
+import * as FaIcons from 'react-icons/fa' ; 
 import Link from 'next/link';
 import React from 'react';
 import styles from '../styles/DaisyMenuHack.module.css';
+
+const getDynamicIcon = (iconName) => {
+    const defaultIcon = RiIcons.RiDashboardFill() ;
+    if(!iconName)
+        return defaultIcon ;
+    const library = iconName.substring(0,2);
+    switch(library) {
+        case 'Fa':
+            return FaIcons[iconName]();
+            break ;
+        case 'Ri':
+            return RiIcons[iconName]();
+            break;
+        case 'Bs':
+            return BsIcons[iconName]();
+            break
+        case 'Ai':
+            return AiIcons[iconName]();
+            break
+        default:
+            return defaultIcon;
+            break ;
+    }
+}
 
 function MenuLink({children,menu,className,onMenuItemClick,index,handleSubmenuToggle}) {
     className = className || "" ;
@@ -59,7 +87,7 @@ export default function Menu(props) {
                           index={index}
                           handleSubmenuToggle={handleSubmenuToggle}
                           className={menu.submenu && aClassName}>
-                { menu.icon ? menu.icon : <RiDashboardFill/> }
+                {getDynamicIcon(menu.icon)}
                 {menu.title}
                 {menu.submenu && props.forMobile && (
                     <svg className="fill-current justify-between" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/></svg>
