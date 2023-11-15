@@ -36,5 +36,6 @@ yarn-error.log*
 /site.js
 /src/pages/content
 /src/pages/index.js
+/example/site.js
 .wombat
 commits_raw*.log
