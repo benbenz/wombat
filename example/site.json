@@ -1,34 +1,68 @@
 {
-  "title" : "Econ" ,
-  "title_extra" : "2023" ,
-  
-  "menuItems" :
-  [
-    { "title": "Intro" , "link": "intro.html"} ,
-    { "title": "Docs" , "link": "/content/documents" , "icon": "AiOutlineFileText"} ,
-    { "title": "Medias" , "link": "/content/medias" , "icon": "BsFillImageFill" , "spacing": true },
-    {
-      "title": "Examples" ,
-      "icon": "BsReverseLayoutTextSidebarReverse",
-      "submenu": true ,
-      "submenuItems" : [
-        { "title": "example1.mdx (thru)" , "link": "/content/example1" } , 
-        { "title": "example1.mdx (proxy)" , "link": "example1.mdx" } , 
-        { "title": "example2.mdx (thru)" , "link": "/content/example2" } , 
-        { "title": "example2.mdx (proxy)" , "link": "example2.mdx" } , 
-        { "title": "example3.md (thru)" , "link": "/content/example3" } , 
-        { "title": "notebooks.ipynb (thru)" , "link": "/content/notebooks" } ,
-        { "title": "notebooks.ipynb (proxy)" , "link": "notebooks.ipynb" } ,
-        { "title": "ols.ipynb (thru)" , "link": "/content/ols" } ,
-        { "title": "myclass.cpp (proxy)" , "link": "myclass.cpp" } ,
-        { "title": "functions.jl (proxy)" , "link": "functions.jl" } 
-      ]
-    } ,
-    { "title": "Analytics" , "link": "analytics.html" , "icon": "AiOutlineBarChart" },
-    { "title": "Subdir file" , "link": "/content/subdir/subfile" , "icon": "AiOutlineBarChart" },
-    { "title": "Subdir file (proxy)" , "link": "subdir/subfile.html" , "icon": "AiOutlineBarChart" },
-    { "title": "Messages" , "icon": "AiOutlineMail" } ,
-    { "title": "All Files" , "link":"/list/_all"  } ,
-    { "title": "All IPYNB" , "link":"/list/ipynb"  } 
-  ]  
+    "title": "My Site",
+    "title_extra": "V1",
+    "menuItems": [
+        {
+            "title": "ALL FILES",
+            "link": "/list/_all"
+        },
+        {
+            "title": "analytics.html",
+            "link": "analytics.html"
+        },
+        {
+            "title": "documents.js",
+            "link": "documents.js"
+        },
+        {
+            "title": "example1.mdx",
+            "link": "example1.mdx"
+        },
+        {
+            "title": "example2.mdx",
+            "link": "example2.mdx"
+        },
+        {
+            "title": "example3.md",
+            "link": "example3.md"
+        },
+        {
+            "title": "functions.jl",
+            "link": "functions.jl"
+        },
+        {
+            "title": "intro.html",
+            "link": "intro.html"
+        },
+        {
+            "title": "medias.js",
+            "link": "medias.js"
+        },
+        {
+            "title": "myclass.cpp",
+            "link": "myclass.cpp"
+        },
+        {
+            "title": "notebooks.ipynb",
+            "link": "notebooks.ipynb"
+        },
+        {
+            "title": "notebooks2.ipynb",
+            "link": "notebooks2.ipynb"
+        },
+        {
+            "title": "ols.ipynb",
+            "link": "ols.ipynb"
+        },
+        {
+            "title": "subdir",
+            "submenu": true,
+            "submenuItems": [
+                {
+                    "title": "subfile.html",
+                    "link": "subdir/subfile.html"
+                }
+            ]
+        }
+    ]
 }
