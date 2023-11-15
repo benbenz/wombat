@@ -25,6 +25,8 @@
       ]
     } ,
     { "title": "Analytics" , "link": "analytics.html" , "icon": "AiOutlineBarChart" },
+    { "title": "Subdir file" , "link": "/content/subdir/subfile" , "icon": "AiOutlineBarChart" },
+    { "title": "Subdir file (proxy)" , "link": "subdir/subfile.html" , "icon": "AiOutlineBarChart" },
     { "title": "Messages" , "icon": "AiOutlineMail" } ,
     { "title": "All Files" , "link":"/list/_all"  } ,
     { "title": "All IPYNB" , "link":"/list/ipynb"  } 
