@@ -35,6 +35,34 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Setting up the example
+
+```
+npm run wombat:example
+```
+
+## Setting up another directory
+
+```
+npm run wombat:install DIRECTORY
+```
+
+## Deploying
+
+Create a static export of the website.
+
+```
+npm run build
+npm run export
+```
+
+or if you have a subpath in your webapp:
+
+```
+NEXTJS_BASE_PATH='/~ben/wombat' NEXTJS_ASSET_PREFIX='/~ben/wombat/' npm run build
+NEXTJS_BASE_PATH='/~ben/wombat' NEXTJS_ASSET_PREFIX='/~ben/wombat/' npm run export
+```
+
 ## Running with docker
 
 Create a `site.js` `index.js` and a content folder and then run 

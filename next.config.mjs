@@ -50,6 +50,13 @@ const withCustomLoader = (nextConfig = {}) => {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  /*
+  basePath: '/~ben/wombat' ,
+  assetPrefix: '/~ben/wombat/' ,
+  */
+  basePath: process.env.NEXTJS_BASE_PATH,
+  assetPrefix: process.env.NEXTJS_ASSET_PREFIX,
   reactStrictMode: true,
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts', 'html' , 
         'ipynb' , 'c' , 'cpp' , 'h' , 'hpp' , 'py' , 'jl' , 'pl' , 'r' , 'php' ] ,
@@ -127,7 +134,6 @@ const nextConfig = {
           jsRule.include.push(wombat_dir);
       }
     }
-
     return config
   }
 }

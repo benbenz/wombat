@@ -11,6 +11,7 @@
     "watchdev": "node watcher.js & next dev",
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
     "start": "next start",
     "lint": "next lint",
     "wombat:example": "node wombat.js example",
