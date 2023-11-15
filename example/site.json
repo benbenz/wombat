@@ -7,6 +7,10 @@
             "link": "/list/_all"
         },
         {
+            "title": "IPYNB FILES",
+            "link": "/list/ipynb"
+        },
+        {
             "title": "analytics.html",
             "link": "analytics.html"
         },

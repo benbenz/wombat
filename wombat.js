@@ -43,6 +43,10 @@ function install(directory) {
                 {
                     'title' : 'ALL FILES' ,
                     'link' : '/list/_all'
+                } ,
+                {
+                    'title' : 'IPYNB FILES' ,
+                    'link' : '/list/ipynb'
                 }
             ]
         }
