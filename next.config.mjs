@@ -51,6 +51,7 @@ const withCustomLoader = (nextConfig = {}) => {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  /*trailingSlash: true,*/
   /*
   basePath: '/~ben/wombat' ,
   assetPrefix: '/~ben/wombat/' ,
